@@ -1,12 +1,19 @@
 'use client'
-import React, { createContext } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 
-export const Context = createContext()
+const Context = createContext()
 
 
 function Provider({ children }) {
 
-    const data = '123'
+    const [allJobs, setAllJobs] = useState([
+        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01" }
+    ])
+
+    const data = {
+        allJobs,
+        setAllJobs
+    }
 
     return (
         <Context.Provider value={data}>
@@ -16,3 +23,5 @@ function Provider({ children }) {
 }
 
 export default Provider
+
+export const useCrudContext = () => useContext(Context)

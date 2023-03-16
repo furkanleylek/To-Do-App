@@ -1,6 +1,10 @@
+'use client'
 import React from 'react'
+import { useCrudContext } from '@/components/context';
+import { MdDelete } from 'react-icons/md'
+function Delete({ deletedId }) {
 
-function Delete({ allJobs, setAllJobs, deletedId }) {
+    const { allJobs, setAllJobs } = useCrudContext();
 
     const removeId = () => {
         setAllJobs((current) =>
@@ -8,11 +12,9 @@ function Delete({ allJobs, setAllJobs, deletedId }) {
     }
 
     return (
-        <div>
-            <button className='border-2 p-2 rounded-xl' onClick={removeId}>
-                Delete
-            </button>
-        </div>
+        <button className='rounded-xl' onClick={removeId}>
+            <MdDelete className='text-red text-xl opacity-70 hover:opacity-100' />
+        </button>
     )
 }
 

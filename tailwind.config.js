@@ -17,7 +17,10 @@ module.exports = {
       "navBlue": "#3498db",
       'white': '#ffffff',
       'grey': '#B0B4BB',
+      'lightGrey': '#D8DCE3',
       'red': '#FD2727',
+      'darkRed': '#D11717',
+      'green': '#04B21D',
       'black': '#111111',
       'purple': '#3f3cbb',
       'midnight': '#121063',
@@ -26,6 +29,40 @@ module.exports = {
       'silver': '#ecebff',
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
+      'greyBlue': '#1d2b3a',
+      'greyWhite': '#ffffff40',
+      'greyB': 'D5D5D5',
+      'main': '#F8FAFD',
+      'primary': '#9CA7BC',
+      'secondry': '#01010D',
+      'tertiary': '#4B4B61',
+      'important': '#E1860D',
+    },
+    keyframes: {
+      'modal': {
+        '0%': {
+          transform: 'translate(0px,100%)',
+          opacity: '0'
+        },
+        '100%': {
+          transform: 'none',
+          opacity: '1'
+        },
+      },
+      'menuModal': {
+        '0%': {
+          margin: '0px 0px 0px -268px',
+        },
+        '100%': {
+          margin: '0px 0px 0px 0px',
+        },
+      }
+
+    },
+    animation: {
+      'modal': 'modal both 400ms linear ',
+      'menuModal': 'menuModal both 200ms linear',
+      'closeModal': 'menuModal both 300ms linear',
     }
   },
   plugins: [],

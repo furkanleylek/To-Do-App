@@ -1,17 +1,27 @@
 import React from 'react'
+import { useCrudContext } from '@/components/context';
+import { HiPencilAlt } from 'react-icons/hi'
 
-function Update() {
-    const updateId = () => {
-        setAllJobs((current) =>
-            current.filter((e) => e.id !== deletedId))
+function Update({ updateId }) {
+
+    const { allJobs, setAllJobs } = useCrudContext();
+
+    const allIds = allJobs.map((e) => { return e.id })
+
+    const idIndex = allIds.findIndex((e) => { return e == updateId })
+
+    const update = () => {
+        setAllJobs(
+            allJobs.map((job) => {
+                return job.id == updateId ? { ...job, title: 'TİTLEDEGİSTİ' } : job;
+            })
+        )
     }
 
     return (
-        <div>
-            <button className='border-2 p-2 rounded-xl' onClick={updateId}>
-                Update
-            </button>
-        </div>
+        <button className='rounded-xl' onClick={update}>
+            <HiPencilAlt className='text-xl text-green opacity-70 hover:opacity-100' />
+        </button>
     )
 }
 
