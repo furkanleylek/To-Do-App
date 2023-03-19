@@ -97,7 +97,7 @@ function Create({ addTask, setAddTask, setHoverTask }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full'>
+        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full mt-80'>
             <input type="text" placeholder='TITLE'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
