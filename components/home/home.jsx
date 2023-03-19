@@ -29,7 +29,7 @@ function HomeComponent() {
             }
             {
                 !addTask && (
-                    <button className='flex justify-start items-center gap-3'
+                    <button className='flex justify-start items-center gap-3 py-4'
                         onMouseOver={() => setHoverTask(true)}
                         onMouseLeave={() => setHoverTask(false)}
                         onClick={() => setAddTask(true)}

@@ -1,11 +1,21 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useCrudContext } from '@/components/context';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 import { MdDateRange } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+function generatePassword() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.random() * n);
+    }
+    return retVal;
+}
 
 function TaskForm({ addTask, setAddTask, setHoverTask }) {
 
@@ -14,6 +24,44 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
     const [textAreaValue, setTextAreaValue] = useState('');
     const [selectedDate, setSelectedDate] = useState(null)
     const [selectedOption, setSelectedOption] = useState("");
+
+    const titleRef = useRef(null);
+    const textAreRef = useRef(null);
+    const dateRef = useRef(null);
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+    let key = generatePassword()
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // handle form submission logic
+    };
+
+    const scrollToRef = (ref) => {
+        if (isKeyboardOpen) {
+            scroll.scrollTo(ref.current.offsetTop - 16);
+        }
+    };
+
+    useEffect(() => {
+        const handleFocus = () => {
+            setIsKeyboardOpen(true);
+        };
+
+        const handleBlur = () => {
+            setIsKeyboardOpen(false);
+        };
+
+        window.addEventListener("focusin", handleFocus);
+        window.addEventListener("focusout", handleBlur);
+
+        return () => {
+            window.removeEventListener("focusin", handleFocus);
+            window.removeEventListener("focusout", handleBlur);
+        };
+    }, []);
+
+
     const options = [
         {
             value: "option1", label: "Priority 1", iconClass: "text-red",
@@ -55,6 +103,8 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                 onChange={(e) => setTitle(e.target.value)}
                 className="px-4 py-2 border-b-2 rounded-t-xl border-lightGrey shadow-md focus:outline-none"
                 name='title'
+                ref={titleRef}
+                onFocus={() => scrollToRef(titleRef)}
             />
             <textarea
                 className="w-full px-4 py-2 text-black focus:outline-none focus:border-navBlue"
@@ -62,6 +112,8 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                 placeholder="Enter your text here"
                 value={textAreaValue}
                 onChange={(e) => setTextAreaValue(e.target.value)}
+                ref={textAreRef}
+                onFocus={() => scrollToRef(textAreRef)}
             />
             {/* date */}
             <div className="flex border-2 text-greyB border-grey hover:bg-silver mb-2 mx-3 focus:bg-silver w-32 rounded-xl items-center justify-center ">
@@ -72,6 +124,8 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                         onChange={(date) => {
                             setSelectedDate(date);
                         }}
+                        ref={dateRef}
+                        onFocus={() => scrollToRef(dateRef)}
                         calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
                         value={
                             selectedDate ? getSelectedDate(selectedDate) : 'End Date'
@@ -102,7 +156,7 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                     value={selectedOption}
                     onChange={(e) => setSelectedOption(e.target.value)}
                     className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
+                >
                     <option value="">Priority</option>
                     {options.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -131,7 +185,7 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                     <IoMdSend className='w-8 h-8 rounded-lg p-[6px] cursor-pointer opacity-90 hover:opacity-100  border-2 bg-darkRed text-white'
                         onClick={() => {
                             {
-                                setAllJobs(oldArray => [...oldArray, { id: "11", email: textAreaValue, title: title, date: getSelectedDate(selectedDate) }])
+                                setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate) }])
                                 setTitle('')
                                 setAddTask(false)
                                 setHoverTask(false)

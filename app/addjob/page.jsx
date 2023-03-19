@@ -6,7 +6,6 @@ function AddJobPage() {
     return (
         <div className='border-2 w-full h-screen'>
             <div className='mx-4 mt-4'>
-                <h3>Add Job</h3>
                 <Create />
                 <Link href="/">Main</Link>
             </div>
