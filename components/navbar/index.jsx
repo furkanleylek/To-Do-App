@@ -13,23 +13,24 @@ function Navbar() {
 
     return (
         <div className='block md:hidden' >
-            <div className='flex justify-between items-center mx-4 my-4 '>
+            <div className='flex justify-between items-center mx-4 my-4'>
                 <button
-                    className="z-10 cursor-pointer transition-all text-4xl"
+                    className="z-50 cursor-pointer transition-all text-4xl"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? (
                         <AiOutlineClose className='text-red' onClick={() => setIsOpen(false)} />
                     ) : (
-                        <HiMenuAlt2 className='text-navBlue ' onClick={() => setIsOpen(true)} />
+                        <HiMenuAlt2 className='text-navBlue' onClick={() => setIsOpen(true)} />
                     )}
                 </button>
                 <h1>logo</h1>
                 <IoPersonCircle className='text-2xl text-navBlue' />
             </div>
+            {/* Sidebar - Open - Close */}
             <OutsideClickHandler onOutsideClick={() => { setIsOpen(false) }} display="contents">
                 <div
-                    className={`sidebar fixed top-0 left-0 h-screen w-60 bg-white shadow-lg transform transition-all duration-300 ease-out ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`sidebar fixed z-10 top-0 left-0 h-screen w-60 bg-white shadow-lg transform transition-all duration-300 ease-out ${isOpen ? "translate-x-0" : "-translate-x-full"
                         }`}
                 >
                     <Menu setIsOpen={setIsOpen} />

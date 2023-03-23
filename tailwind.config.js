@@ -31,7 +31,7 @@ module.exports = {
       'bermuda': '#78dcca',
       'greyBlue': '#1d2b3a',
       'greyWhite': '#ffffff40',
-      'greyB': 'D5D5D5',
+      'greyB': '#D5D5D5',
       'main': '#F8FAFD',
       'primary': '#9CA7BC',
       'secondry': '#01010D',
@@ -56,6 +56,15 @@ module.exports = {
         '100%': {
           margin: '0px 0px 0px 0px',
         },
+      },
+      'buttonLeftToRight': {
+        '0%': {
+          transform: ' translateX(-100%)',
+        },
+        '100%': {
+          transform: 'translateX(0%)',
+          background: 'red',
+        }
       }
 
     },
@@ -63,6 +72,7 @@ module.exports = {
       'modal': 'modal both 400ms linear ',
       'menuModal': 'menuModal both 200ms linear',
       'closeModal': 'menuModal both 300ms linear',
+      'buttonLeftToRight': 'buttonLeftToRight both 300ms ease-out'
     }
   },
   plugins: [],

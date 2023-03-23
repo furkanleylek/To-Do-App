@@ -4,6 +4,7 @@ import { useCrudContext } from '@/components/context';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 import { MdDateRange } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
+import { BsFlag } from 'react-icons/bs'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -97,7 +98,7 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full'>
+        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 '>
             <input type="text" placeholder='TITLE'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -115,68 +116,62 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                 ref={textAreRef}
                 onFocus={() => scrollToRef(textAreRef)}
             />
-            {/* date */}
-            <div className="flex border-2 text-greyB border-grey hover:bg-silver mb-2 mx-3 focus:bg-silver w-32 rounded-xl items-center justify-center ">
-                <span className='mt-1 text-center pointer-events-none outline-none'> <MdDateRange /> </span>
-                <div className="w-24 rounded-lg">
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={(date) => {
-                            setSelectedDate(date);
-                        }}
-                        ref={dateRef}
-                        onFocus={() => scrollToRef(dateRef)}
-                        calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
-                        value={
-                            selectedDate ? getSelectedDate(selectedDate) : 'End Date'
-                        }
-                        className="text-center w-24 hover:bg-silver bg-transparent caret-transparent text-sm font-medium  focus:outline-none  cursor-pointer"
-                        dateFormat="dd/MM/yyyy"
-                        minDate={new Date()}
-                        highlightDates={[
-                            {
-                                "background-color": "rgba(59, 130, 246, 0.3)",
-                                "border-radius": "50%",
-                                "border-width": "2px",
-                                "border-style": "solid",
-                                "border-color": "#3B82F6",
-                                filter: "brightness(85%)",
-                                dates: [new Date()],
-                            },
-                        ]}
-                    />
-                </div>
-            </div>
-            {/* date */}
-            {/* select */}
-            <div className="flex flex-col space-y-2">
-                <select
-                    id="options"
-                    name="options"
-                    value={selectedOption}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                    className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                    <option value="">Priority</option>
-                    {options.map((option) => (
-                        <option key={option.value} value={option.value}>
-                            {option.icon && (
-                                <span className={`mr-2 text-red`}>
-                                    {option.icon}
-                                </span>
-                            )
+            <div className='flex items-center mb-2 mx-3 gap-8 '>
+                {/* date */}
+                <div className="flex h-8 border-2 border-grey hover:bg-silver  focus:bg-silver w-32 rounded items-center justify-center ">
+                    <span className='mt-1 text-center pointer-events-none outline-none'> <MdDateRange /> </span>
+                    <div className="w-24 rounded-lg">
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={(date) => {
+                                setSelectedDate(date);
+                            }}
+                            ref={dateRef}
+                            onFocus={() => scrollToRef(dateRef)}
+                            calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
+                            value={
+                                selectedDate ? getSelectedDate(selectedDate) : 'End Date'
                             }
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
-                {/* {selectedOption && (
-                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            className="text-center w-24 hover:bg-silver bg-transparent caret-transparent text-sm font-medium  focus:outline-none cursor-pointer"
+                            dateFormat="dd/MM/yyyy"
+                            minDate={new Date()}
+                            highlightDates={[
+                                {
+                                    "background-color": "rgba(59, 130, 246, 0.3)",
+                                    "border-radius": "50%",
+                                    "border-width": "2px",
+                                    "border-style": "solid",
+                                    "border-color": "#3B82F6",
+                                    filter: "brightness(85%)",
+                                    dates: [new Date()],
+                                },
+                            ]}
+                        />
                     </div>
-                )} */}
-            </div>
+                </div>
+                {/* date */}
+                {/* select */}
+                <div className="flex flex-col space-y-2  ">
+                    <select
+                        id="options"
+                        name="options"
+                        value={selectedOption}
+                        onChange={(e) => setSelectedOption(e.target.value)}
+                        className="w-36 h-8 border-2 border-grey rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                        <option value="">Priority</option>
+                        {options.map((option) => (
+                            <option key={option.value} value={option.value} className="flex w-8 bg-red">
+                                <BsFlag />
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <BsFlag />
 
-            {/* select */}
+                {/* select */}
+            </div>
 
             <div className='flex items-center justify-between border-t-2 border-lightGrey px-2'>
                 <span>projects</span>

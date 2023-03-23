@@ -17,9 +17,6 @@ function HomeComponent() {
     console.log("sa")
     return (
         <ClientOnly>
-            <Link href='/addjob'>
-                <button className='border-2 rounded-xl p-2'>add job</button>
-            </Link>
             {
                 allJobs.map((e) => (
                     <div key={e.id} className="flex flex-col justfiy-center items-center">

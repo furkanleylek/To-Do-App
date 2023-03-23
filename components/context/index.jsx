@@ -7,12 +7,12 @@ const Context = createContext()
 function Provider({ children }) {
 
     const [allJobs, setAllJobs] = useState([
-        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01" }
+        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", priority: 0 }
     ])
 
     const data = {
         allJobs,
-        setAllJobs
+        setAllJobs,
     }
 
     return (

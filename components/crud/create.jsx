@@ -17,7 +17,7 @@ function generatePassword() {
     return retVal;
 }
 
-function Create({ addTask, setAddTask, setHoverTask }) {
+function Create() {
 
     const { allJobs, setAllJobs } = useCrudContext();
     const [title, setTitle] = useState('')
@@ -97,17 +97,17 @@ function Create({ addTask, setAddTask, setHoverTask }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full mt-80'>
+        <div className='flex flex-col justify-between rounded-xl w-full gap-4'>
             <input type="text" placeholder='TITLE'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="px-4 py-2 border-b-2 rounded-t-xl border-lightGrey shadow-md focus:outline-none"
+                className="px-4 py-4 border-b-2 rounded-xl border-lightGrey shadow-md focus:outline-none"
                 name='title'
                 ref={titleRef}
                 onFocus={() => scrollToRef(titleRef)}
             />
             <textarea
-                className="w-full px-4 py-2 text-black focus:outline-none focus:border-navBlue"
+                className="w-full px-4 py-4 border-b-2 rounded-xl border-lightGrey shadow-md focus:outline-none"
                 rows="4"
                 placeholder="Enter your text here"
                 value={textAreaValue}
@@ -179,16 +179,14 @@ function Create({ addTask, setAddTask, setHoverTask }) {
             {/* select */}
 
             <div className='flex items-center justify-between border-t-2 border-lightGrey px-2'>
-                <span>projects</span>
+                <span title="This is a mouseover text!">projects</span>
                 <div className='flex items-center'>
-                    <AiOutlineClose className='w-8 h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal' onClick={() => { setAddTask(false), setHoverTask(false) }} />
+                    <AiOutlineClose className='w-8 h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal' />
                     <IoMdSend className='w-8 h-8 rounded-lg p-[6px] cursor-pointer opacity-90 hover:opacity-100  border-2 bg-darkRed text-white'
                         onClick={() => {
                             {
                                 setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate) }])
                                 setTitle('')
-                                setAddTask(false)
-                                setHoverTask(false)
                             }
                         }}
                     />
