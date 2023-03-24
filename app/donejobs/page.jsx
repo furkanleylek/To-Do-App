@@ -1,9 +1,13 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
+
 
 function DoneJobsPage() {
   return (
-    <div>DoneJobsPage</div>
-  )
+    <div>
+      donejobs
+    </div>
+  );
 }
 
 export default DoneJobsPage

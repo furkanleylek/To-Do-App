@@ -5,6 +5,7 @@ import { IoPersonCircle } from 'react-icons/io5'
 import { AiOutlineClose } from 'react-icons/ai'
 import Menu from './menu'
 import OutsideClickHandler from 'react-outside-click-handler'
+import Image from 'next/image'
 
 
 function Navbar() {
@@ -24,7 +25,7 @@ function Navbar() {
                         <HiMenuAlt2 className='text-navBlue' onClick={() => setIsOpen(true)} />
                     )}
                 </button>
-                <h1>logo</h1>
+                <Image src="/favicon.ico" alt="logo" width="64" height="64" />
                 <IoPersonCircle className='text-2xl text-navBlue' />
             </div>
             {/* Sidebar - Open - Close */}

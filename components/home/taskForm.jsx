@@ -2,13 +2,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useCrudContext } from '@/components/context';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
-import { MdDateRange } from 'react-icons/md'
+import { MdDateRange, MdLabelImportant } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
 import { BsFlag } from 'react-icons/bs'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function generatePassword() {
+function generateKey() {
     var length = 8,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
         retVal = "";
@@ -18,25 +18,18 @@ function generatePassword() {
     return retVal;
 }
 
-function TaskForm({ addTask, setAddTask, setHoverTask }) {
-
-    const { allJobs, setAllJobs } = useCrudContext();
-    const [title, setTitle] = useState('')
-    const [textAreaValue, setTextAreaValue] = useState('');
+function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
+    const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMax } = useCrudContext();
+    const [title, setTitle] = useState(prevTitle)
+    const [textAreaValue, setTextAreaValue] = useState(prevDesc);
     const [selectedDate, setSelectedDate] = useState(null)
-    const [selectedOption, setSelectedOption] = useState("");
-
+    const [isImportant, setIsImportant] = useState(prevImportant)
     const titleRef = useRef(null);
     const textAreRef = useRef(null);
     const dateRef = useRef(null);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
-    let key = generatePassword()
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // handle form submission logic
-    };
+    let key = generateKey()
 
     const scrollToRef = (ref) => {
         if (isKeyboardOpen) {
@@ -62,22 +55,6 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
         };
     }, []);
 
-
-    const options = [
-        {
-            value: "option1", label: "Priority 1", iconClass: "text-red",
-        },
-        {
-            value: "option2", label: "Priority 2", iconClass: "text-green",
-        },
-        {
-            value: "option3", label: "Priority 3", iconClass: "text-blue",
-        },
-        {
-            value: "option4", label: "Priority 4", iconClass: "text-white",
-        },
-    ];
-
     function getSelectedDate(value) {
         const today = new Date();
         const tomorrow = new Date(today);
@@ -98,7 +75,7 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 '>
+        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 max-w-xl '>
             <input type="text" placeholder='TITLE'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -116,78 +93,105 @@ function TaskForm({ addTask, setAddTask, setHoverTask }) {
                 ref={textAreRef}
                 onFocus={() => scrollToRef(textAreRef)}
             />
-            <div className='flex items-center mb-2 mx-3 gap-8 '>
-                {/* date */}
-                <div className="flex h-8 border-2 border-grey hover:bg-silver  focus:bg-silver w-32 rounded items-center justify-center ">
-                    <span className='mt-1 text-center pointer-events-none outline-none'> <MdDateRange /> </span>
-                    <div className="w-24 rounded-lg">
-                        <DatePicker
-                            selected={selectedDate}
-                            onChange={(date) => {
-                                setSelectedDate(date);
-                            }}
-                            ref={dateRef}
-                            onFocus={() => scrollToRef(dateRef)}
-                            calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
-                            value={
-                                selectedDate ? getSelectedDate(selectedDate) : 'End Date'
-                            }
-                            className="text-center w-24 hover:bg-silver bg-transparent caret-transparent text-sm font-medium  focus:outline-none cursor-pointer"
-                            dateFormat="dd/MM/yyyy"
-                            minDate={new Date()}
-                            highlightDates={[
-                                {
-                                    "background-color": "rgba(59, 130, 246, 0.3)",
-                                    "border-radius": "50%",
-                                    "border-width": "2px",
-                                    "border-style": "solid",
-                                    "border-color": "#3B82F6",
-                                    filter: "brightness(85%)",
-                                    dates: [new Date()],
-                                },
-                            ]}
-                        />
+            <div className='flex items-center justify-between border-t-2 pt-2 bg-white rounded-b-full border-lightGrey px-2'>
+                <div className='flex items-center mb-2 gap-8 bg-white px-3'>
+                    {/* date */}
+                    <div className="flex h-8 border-2 border-grey hover:bg-silver  focus:bg-silver w-32 rounded items-center justify-center ">
+                        <MdDateRange className='text-red' />
+                        <div className="w-24 rounded-lg">
+                            <DatePicker
+                                selected={selectedDate}
+                                onChange={(date) => {
+                                    setSelectedDate(date);
+                                }}
+                                ref={dateRef}
+                                onFocus={() => scrollToRef(dateRef)}
+                                calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
+                                value={
+                                    selectedDate ? getSelectedDate(selectedDate) : 'End Date'
+                                }
+                                className="text-center w-24 hover:bg-silver bg-transparent caret-transparent text-sm font-medium  focus:outline-none cursor-pointer"
+                                dateFormat="dd/MM/yyyy"
+                                minDate={new Date()}
+                                highlightDates={[
+                                    {
+                                        "background-color": "rgba(59, 130, 246, 0.3)",
+                                        "border-radius": "50%",
+                                        "border-width": "2px",
+                                        "border-style": "solid",
+                                        "border-color": "#3B82F6",
+                                        filter: "brightness(85%)",
+                                        dates: [new Date()],
+                                    },
+                                ]}
+                            />
+                        </div>
                     </div>
-                </div>
-                {/* date */}
-                {/* select */}
-                <div className="flex flex-col space-y-2  ">
-                    <select
-                        id="options"
-                        name="options"
-                        value={selectedOption}
-                        onChange={(e) => setSelectedOption(e.target.value)}
-                        className="w-36 h-8 border-2 border-grey rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    {/* date */}
+                    {/* important */}
+
+                    <button
+                        className={`${isImportant ? `bg-important border-transparent` : `hover:bg-silver border-2 border-grey`} transition-all flex h-8 w-32 rounded items-center justify-center gap-2`}
+                        onClick={() => setIsImportant((prev) => !prev)}
                     >
-                        <option value="">Priority</option>
-                        {options.map((option) => (
-                            <option key={option.value} value={option.value} className="flex w-8 bg-red">
-                                <BsFlag />
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
+                        <MdLabelImportant className={`${isImportant ? `text-white` : `text-important`} text-2xl`} />
+                        <span className={`${isImportant ? `text-white` : `text-black`} text-sm font-medium`}>Important</span>
+                    </button>
+                    {/* select */}
                 </div>
-                <BsFlag />
-
-                {/* select */}
-            </div>
-
-            <div className='flex items-center justify-between border-t-2 border-lightGrey px-2'>
-                <span>projects</span>
-                <div className='flex items-center'>
-                    <AiOutlineClose className='w-8 h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal' onClick={() => { setAddTask(false), setHoverTask(false) }} />
-                    <IoMdSend className='w-8 h-8 rounded-lg p-[6px] cursor-pointer opacity-90 hover:opacity-100  border-2 bg-darkRed text-white'
+                <div className='flex items-center justify-evenly w-full mb-2'>
+                    <AiOutlineClose className='w-8 h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal'
                         onClick={() => {
                             {
-                                setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate) }])
-                                setTitle('')
                                 setAddTask(false)
                                 setHoverTask(false)
+                                setAllJobs(
+                                    allJobs.map((job) => {
+                                        return job.id == updateId ? { ...job, isUpdate: false } : job;
+                                    })
+                                )
                             }
-                        }}
-                    />
+                        }} />
+                    {isUpdate
+                        ?
+                        <button
+                            onClick={() => {
+                                {
+                                    setAllJobs(
+                                        allJobs.map((job) => {
+                                            return job.id == updateId ? { ...job, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false } : job;
+                                        })
+                                    )
+                                    setAddTask(false)
+                                    setHoverTask(false)
+                                    setCheckMax(true)
+                                }
+                            }}
+                            disabled={title ? false : true}
+                            className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
+                        >
+                            <IoMdSend className='w-8 h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
+                            />
+                        </button>
+                        :
+                        <button
+                            onClick={() => {
+                                {
+                                    setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant }])
+                                    setAddTask(false)
+                                    setHoverTask(false)
+                                    setCheckMax(true)
+                                }
+                            }}
+                            disabled={title ? false : true}
+                            className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
+                        >
+                            <IoMdSend className='w-8 h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
+                            />
+                        </button>
+                    }
                 </div>
+
             </div>
         </div>
     )

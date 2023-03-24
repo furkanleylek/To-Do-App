@@ -13,7 +13,7 @@ function Update({ updateId }) {
     const update = () => {
         setAllJobs(
             allJobs.map((job) => {
-                return job.id == updateId ? { ...job, title: 'TİTLEDEGİSTİ' } : job;
+                return job.id == updateId ? { ...job, isUpdate: true } : job;
             })
         )
     }

@@ -10,17 +10,14 @@ import TaskForm from './taskForm';
 
 function HomeComponent() {
 
-    const { allJobs, setAllJobs } = useCrudContext();
-    const [hoverTask, setHoverTask] = useState(false)
-    const [addTask, setAddTask] = useState(false)
+    const { allJobs, setAllJobs, hoverTask, setHoverTask, addTask, setAddTask } = useCrudContext();
 
-    console.log("sa")
     return (
         <ClientOnly>
             {
                 allJobs.map((e) => (
-                    <div key={e.id} className="flex flex-col justfiy-center items-center">
-                        <SingleTask singleId={e.id} singleEmail={e.email} singleTitle={e.title} singleDate={e.date} />
+                    <div key={e.id} className="flex flex-col justfiy-center items-center max-w-xl ">
+                        <SingleTask key={e.id} singleId={e.id} singleEmail={e.email} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} />
                     </div>
                 ))
             }
@@ -38,7 +35,7 @@ function HomeComponent() {
             }
             {
                 addTask && (
-                    <TaskForm addTask={addTask} setAddTask={setAddTask} setHoverTask={setHoverTask} />
+                    <TaskForm />
                 )
             }
         </ClientOnly>
