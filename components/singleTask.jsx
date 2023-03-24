@@ -15,7 +15,6 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
     const [isMax, setIsMax] = useState(false);
     const { checkMax, setCheckMax } = useCrudContext();
 
-    console.log(checkMax)
 
     useEffect(() => {
         if (typeof singleEmail !== "undefined" && singleEmail.length >= 70) {
@@ -24,7 +23,6 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
         else if (typeof singleEmail !== "undefined" && singleEmail.length <= 70) {
             setIsMax(false)
         }
-        console.log(checkMax)
         setCheckMax(false)
     }, [checkMax])
 
@@ -32,9 +30,9 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
         <>
             {!isUpdate
                 ?
-                <div className='flex w-full gap-4 items-center  '>
+                <div className='flex w-full gap-4 items-center '>
                     <div className={`${isImportant ? `border-2 border-important shadow-important shadow-sm` : `border-2 border-lightGrey shadow-md`} flex flex-col justify-center px-3 rounded-xl  bg-white w-full p-2 my-4`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
-                        <div className='flex items-center h-8 justify-between'>
+                        <div className='flex items-center h-8 justify-between flex-wrap'>
                             <h5 className='cursor-default text-lg text-navBlue font-bold'>{singleTitle}</h5>
                             {showUpDelete &&
                                 <div className='flex flex-col items-start justify-between h-full '>
@@ -55,7 +53,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                                 </span>
                             )}
                         </p>
-                        <div className='flex justify-between items-center'>
+                        <div className='flex justify-between items-center flex-wrap'>
                             <span className='cursor-default flex text-sm items-center gap-2 opacity-90 h-8 text-red text-center  font-bold italic '>
                                 <MdDateRange />
                                 {singleDate}
@@ -67,9 +65,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                     </div>
                 </div>
                 :
-                <div>
-                    <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={singleDate} prevDesc={singleEmail} prevImportant={isImportant} />
-                </div>
+                <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={singleDate} prevDesc={singleEmail} prevImportant={isImportant} />
             }
         </>
     )

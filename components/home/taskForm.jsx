@@ -20,8 +20,8 @@ function generateKey() {
 
 function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMax } = useCrudContext();
-    const [title, setTitle] = useState(prevTitle)
-    const [textAreaValue, setTextAreaValue] = useState(prevDesc);
+    const [title, setTitle] = useState(typeof prevTitle == "undefined" ? '' : prevTitle)
+    const [textAreaValue, setTextAreaValue] = useState(typeof prevDesc == "undefined" ? '' : prevDesc);
     const [selectedDate, setSelectedDate] = useState(null)
     const [isImportant, setIsImportant] = useState(prevImportant)
     const titleRef = useRef(null);
@@ -93,12 +93,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                 ref={textAreRef}
                 onFocus={() => scrollToRef(textAreRef)}
             />
-            <div className='flex items-center justify-between border-t-2 pt-2 bg-white rounded-b-full border-lightGrey px-2'>
-                <div className='flex items-center mb-2 gap-8 bg-white px-3'>
+            <div className='flex flex-wrap items-center justify-between border-t-2 pt-2 bg-white rounded-b-[20px] border-lightGrey px-2'>
+                <div className='flex items-center mb-2 gap-4 sm:gap-8 bg-white px-3 flex-wrap '>
                     {/* date */}
-                    <div className="flex h-8 border-2 border-grey hover:bg-silver  focus:bg-silver w-32 rounded items-center justify-center ">
-                        <MdDateRange className='text-red' />
-                        <div className="w-24 rounded-lg">
+                    <div className="flex h-8 border-2 border-grey hover:bg-silver focus:bg-silver px-1 sm:px-0 rounded items-center justify-center ">
+                        <MdDateRange className='text-red text-md sm:text-xl sm:ml-2' />
+                        <div className="rounded-lg">
                             <DatePicker
                                 selected={selectedDate}
                                 onChange={(date) => {
@@ -110,7 +110,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 value={
                                     selectedDate ? getSelectedDate(selectedDate) : 'End Date'
                                 }
-                                className="text-center w-24 hover:bg-silver bg-transparent caret-transparent text-sm font-medium  focus:outline-none cursor-pointer"
+                                className="text-center w-14 sm:w-24  mb-1 hover:bg-silver bg-transparent caret-transparent text-[10px] sm:text-sm font-medium  focus:outline-none cursor-pointer"
                                 dateFormat="dd/MM/yyyy"
                                 minDate={new Date()}
                                 highlightDates={[
@@ -131,16 +131,16 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                     {/* important */}
 
                     <button
-                        className={`${isImportant ? `bg-important border-transparent` : `hover:bg-silver border-2 border-grey`} transition-all flex h-8 w-32 rounded items-center justify-center gap-2`}
+                        className={`${isImportant ? `bg-important border-transparent` : `hover:bg-silver border-2 border-grey`} transition-all flex h-8 px-1 sm:px-0 sm:min-w-[128px] rounded items-center justify-center gap-2`}
                         onClick={() => setIsImportant((prev) => !prev)}
                     >
-                        <MdLabelImportant className={`${isImportant ? `text-white` : `text-important`} text-2xl`} />
-                        <span className={`${isImportant ? `text-white` : `text-black`} text-sm font-medium`}>Important</span>
+                        <MdLabelImportant className={`${isImportant ? `text-white` : `text-important`} text-md sm:text-2xl`} />
+                        <span className={`${isImportant ? `text-white` : `text-black`} text-[10px] sm:text-sm font-medium`}>Important</span>
                     </button>
                     {/* select */}
                 </div>
-                <div className='flex items-center justify-evenly w-full mb-2'>
-                    <AiOutlineClose className='w-8 h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal'
+                <div className='flex flex-wrap items-center justify-evenly mb-2 '>
+                    <AiOutlineClose className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal'
                         onClick={() => {
                             {
                                 setAddTask(false)
@@ -170,7 +170,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                             disabled={title ? false : true}
                             className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
                         >
-                            <IoMdSend className='w-8 h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
+                            <IoMdSend className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
                             />
                         </button>
                         :
@@ -186,7 +186,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                             disabled={title ? false : true}
                             className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
                         >
-                            <IoMdSend className='w-8 h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
+                            <IoMdSend className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
                             />
                         </button>
                     }
