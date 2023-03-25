@@ -1,5 +1,4 @@
 import React from 'react'
-import AddJob from '@/components/sidebar/addJob'
 import Create from '@/components/crud/create'
 import Link from 'next/link'
 function AddJobPage() {

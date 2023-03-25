@@ -7,37 +7,53 @@ import SingleTask from '../singleTask'
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 import { IoMdSend } from 'react-icons/io'
 import TaskForm from './taskForm';
-
+import UndoModal from '../modals/undoModal';
 function HomeComponent() {
 
-    const { allJobs, setAllJobs, hoverTask, setHoverTask, addTask, setAddTask } = useCrudContext();
-
+    const { allJobs, hoverTask, setHoverTask, addTask, setAddTask, doneTasks } = useCrudContext();
     return (
-        <ClientOnly>
-            {
-                allJobs.map((e) => (
-                    <div key={e.id} className="flex flex-col justfiy-center items-center max-w-xl ">
-                        <SingleTask key={e.id} singleId={e.id} singleEmail={e.email} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} />
-                    </div>
-                ))
-            }
-            {
-                !addTask && (
-                    <button className='flex justify-start items-center gap-3 py-4'
-                        onMouseOver={() => setHoverTask(true)}
-                        onMouseLeave={() => setHoverTask(false)}
-                        onClick={() => setAddTask(true)}
-                    >
-                        <AiOutlinePlus className={hoverTask ? `bg-darkRed rounded-full cursor-pointer text-white text-xl` : `pointer-events-none text-red text-xl`} />
-                        <span className={hoverTask ? `text-red` : `text-grey`}>Add Task</span>
-                    </button>
-                )
-            }
-            {
-                addTask && (
-                    <TaskForm />
-                )
-            }
+        <ClientOnly >
+            <div className='flex flex-col items-center justify-center m-auto w-full  '>
+                <div className='w-full max-w-xl'>
+                    {
+                        allJobs.map((e) => (
+                            <div key={e.id} className="flex flex-col justfiy-center items-center w-full">
+                                <SingleTask key={e.id} singleId={e.id} singleEmail={e.email} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} isCheck={e.isCheck} />
+                            </div>
+                        ))
+                    }
+                    <h1>ALL JOBS : {allJobs.length}</h1>
+                    <h1>DONE JOBS :{doneTasks.length}</h1>
+                    {
+                        !addTask && (
+                            <button className='flex justify-start items-center gap-3 py-4 w-[100px]'
+                                onMouseOver={() => setHoverTask(true)}
+                                onMouseLeave={() => setHoverTask(false)}
+                                onClick={() => setAddTask(true)}
+                            >
+                                <AiOutlinePlus className={hoverTask ? `bg-darkRed rounded-full cursor-pointer text-white text-xl` : `pointer-events-none text-red text-xl`} />
+                                <span className={hoverTask ? `text-red` : `text-grey`}>Add Task</span>
+                            </button>
+                        )
+                    }
+                    {
+                        addTask && (
+                            <TaskForm />
+                        )
+                    }
+                    {
+                        doneTasks.map((e) => (
+                            <>
+                                {
+                                    e.isCheck && (
+                                        <UndoModal doneId={e.id} key={e.id} checkedIndex={e.checkedIndex} singleEmail={e.email} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} isCheck={e.isCheck} />
+                                    )
+                                }
+                            </>
+                        ))
+                    }
+                </div>
+            </div>
         </ClientOnly>
     )
 }

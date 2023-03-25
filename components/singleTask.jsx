@@ -5,16 +5,13 @@ import Update from './crud/update'
 import { useCrudContext } from '@/components/context';
 import { TiTick } from 'react-icons/ti'
 import { MdDateRange } from 'react-icons/md'
-import { isThisMinute } from 'date-fns'
 import TaskForm from './home/taskForm'
 
-function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportant, isUpdate }) {
-
+function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
     const [showUpDelete, setShowUpDelete] = useState(false)
-    const [isDone, setIsDone] = useState(false)
     const [isMax, setIsMax] = useState(false);
-    const { checkMax, setCheckMax } = useCrudContext();
-
+    const [isDone, setIsDone] = useState(false)
+    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs } = useCrudContext();
 
     useEffect(() => {
         if (typeof singleEmail !== "undefined" && singleEmail.length >= 70) {
@@ -23,14 +20,27 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
         else if (typeof singleEmail !== "undefined" && singleEmail.length <= 70) {
             setIsMax(false)
         }
-        setCheckMax(false)
-    }, [checkMax])
+        setCheckMaxDescLength(false)
+
+        const timerAnimation = setTimeout(() => {
+            setAllJobs(
+                allJobs.map((task) => {
+                    return task.id == singleId ? { ...task, isCheck: false } : task;
+                })
+            )
+        }, 2000);
+
+        return () => clearTimeout(timerAnimation);
+
+    }, [checkMaxDescLength])
+
+    const checkedIndex = allJobs.findIndex((e) => { return e.id == singleId })
 
     return (
         <>
             {!isUpdate
                 ?
-                <div className='flex w-full gap-4 items-center '>
+                <div className={`flex w-full gap-4 items-center ${isDone && `animate-rightToOutside animation-delay-400`} ${isCheck && `animate-outSideToLeft animation-delay-200`} `}>
                     <div className={`${isImportant ? `border-2 border-important shadow-important shadow-sm` : `border-2 border-lightGrey shadow-md`} flex flex-col justify-center px-3 rounded-xl  bg-white w-full p-2 my-4`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
                         <div className='flex items-center h-8 justify-between flex-wrap'>
                             <h5 className='cursor-default text-lg text-navBlue font-bold'>{singleTitle}</h5>
@@ -58,7 +68,16 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                                 <MdDateRange />
                                 {singleDate}
                             </span>
-                            <button className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `} onClick={() => setIsDone(true)}>
+                            <button
+                                className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `}
+                                onClick={() => {
+                                    setDoneTasks(doneTask => [...doneTask, { id: singleId, checkedIndex: checkedIndex, email: singleEmail, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
+                                    setIsDone(true)
+                                    setTimeout(() => {
+                                        setAllJobs((current) => current.filter((e) => e.id !== singleId))
+                                    }, 1000);
+                                }}
+                            >
                                 <TiTick className={`${isDone ? `text-white ` : `text-black opacity-50 hover:text-green`}  text-2xl  text-center m-auto`} />
                             </button>
                         </div>

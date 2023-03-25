@@ -7,12 +7,12 @@ const Context = createContext()
 function Provider({ children }) {
 
     const [allJobs, setAllJobs] = useState([
-        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", important: false, isUpdate: false }
+        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", important: false, isUpdate: false, isCheck: false }
     ])
+    const [doneTasks, setDoneTasks] = useState([])
     const [hoverTask, setHoverTask] = useState(false)
     const [addTask, setAddTask] = useState(false)
-    const [checkMax, setCheckMax] = useState(false)
-
+    const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
     const data = {
         allJobs,
         setAllJobs,
@@ -20,8 +20,10 @@ function Provider({ children }) {
         setHoverTask,
         addTask,
         setAddTask,
-        checkMax,
-        setCheckMax
+        checkMaxDescLength,
+        setCheckMaxDescLength,
+        doneTasks,
+        setDoneTasks,
     }
 
     return (

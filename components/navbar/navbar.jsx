@@ -11,7 +11,6 @@ import Image from 'next/image'
 function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false)
-
     return (
         <div className='block md:hidden' >
             <div className='flex justify-between items-center mx-4 my-4'>

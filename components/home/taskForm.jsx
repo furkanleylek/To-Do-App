@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { useCrudContext } from '@/components/context';
-import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose } from 'react-icons/ai'
 import { MdDateRange, MdLabelImportant } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
 import { BsFlag } from 'react-icons/bs'
@@ -19,7 +19,7 @@ function generateKey() {
 }
 
 function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
-    const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMax } = useCrudContext();
+    const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMaxDescLength } = useCrudContext();
     const [title, setTitle] = useState(typeof prevTitle == "undefined" ? '' : prevTitle)
     const [textAreaValue, setTextAreaValue] = useState(typeof prevDesc == "undefined" ? '' : prevDesc);
     const [selectedDate, setSelectedDate] = useState(null)
@@ -159,12 +159,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 {
                                     setAllJobs(
                                         allJobs.map((job) => {
-                                            return job.id == updateId ? { ...job, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false } : job;
+                                            return job.id == updateId ? { ...job, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
                                         })
                                     )
                                     setAddTask(false)
                                     setHoverTask(false)
-                                    setCheckMax(true)
+                                    setCheckMaxDescLength(true)
                                 }
                             }}
                             disabled={title ? false : true}
@@ -177,10 +177,10 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                         <button
                             onClick={() => {
                                 {
-                                    setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant }])
+                                    setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
                                     setAddTask(false)
                                     setHoverTask(false)
-                                    setCheckMax(true)
+                                    setCheckMaxDescLength(true)
                                 }
                             }}
                             disabled={title ? false : true}

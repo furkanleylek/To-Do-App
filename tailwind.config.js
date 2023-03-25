@@ -18,6 +18,7 @@ module.exports = {
       'white': '#ffffff',
       'grey': '#B0B4BB',
       'lightGrey': '#D8DCE3',
+      'lightRed': '#FC7A7A',
       'red': '#FD2727',
       'darkRed': '#D11717',
       'green': '#04B21D',
@@ -63,7 +64,22 @@ module.exports = {
         },
         '100%': {
           transform: 'translateX(0%)',
-          background: 'red',
+        }
+      },
+      'rightToOutside': {
+        '0%': {
+          transform: ' translateX(0%)',
+        },
+        '100%': {
+          transform: 'translateX(200%)',
+        }
+      },
+      'outSideToLeft': {
+        '0%': {
+          transform: ' translateX(200%)',
+        },
+        '100%': {
+          transform: 'translateX(0%)',
         }
       }
 
@@ -72,8 +88,13 @@ module.exports = {
       'modal': 'modal both 400ms linear ',
       'menuModal': 'menuModal both 200ms linear',
       'closeModal': 'menuModal both 300ms linear',
-      'buttonLeftToRight': 'buttonLeftToRight both 300ms ease-out'
+      'buttonLeftToRight': 'buttonLeftToRight both 300ms ease-out',
+      'rightToOutside': 'rightToOutside both 400ms ease-out',
+      'outSideToLeft': 'outSideToLeft both 400ms ease-out'
     }
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-animation-delay"),
+
+  ],
 }
