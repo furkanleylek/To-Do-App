@@ -71,7 +71,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                             <button
                                 className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `}
                                 onClick={() => {
-                                    setDoneTasks(doneTask => [...doneTask, { id: singleId, checkedIndex: checkedIndex, email: singleEmail, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
+                                    setDoneTasks(() => [{ id: singleId, checkedIndex: checkedIndex, email: singleEmail, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
                                     setIsDone(true)
                                     setTimeout(() => {
                                         setAllJobs((current) => current.filter((e) => e.id !== singleId))
