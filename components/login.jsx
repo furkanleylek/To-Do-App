@@ -34,7 +34,7 @@ function Login({ setLogin }) {
 
 
     return (
-        <div className='flex flex-col flex-1 w-full h-full'>
+        <div className='flex flex-col flex-1 w-full h-full overflow-y-hidden'>
             <AiOutlineClose className='text-4xl m-4 hover:scale-110 text-red self-end transition-all cursor-pointer ' onClick={() => setLogin(false)} />
             <div className="flex flex-col justify-center items-center h-full">
                 <FaCheck className='text-navBlue text-4xl lg:text-6xl ' />
@@ -62,7 +62,7 @@ function Login({ setLogin }) {
                     <button className="bg-navBlue hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Login
                     </button>
-                    <button className="bg-navBlue hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    <button className="bg-metal hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Demo App
                     </button>
                     <span className='text-grey font-bold'>Not a member yet ?
