@@ -34,11 +34,11 @@ function Login({ setLogin }) {
 
 
     return (
-        <div className='flex flex-col w-full h-full'>
+        <div className='flex flex-col flex-1 w-full h-full'>
             <AiOutlineClose className='text-4xl m-4 hover:scale-110 text-red self-end transition-all cursor-pointer ' onClick={() => setLogin(false)} />
             <div className="flex flex-col justify-center items-center h-full">
-                <FaCheck className='text-navBlue text-6xl ' />
-                <form className="flex flex-col items-center justify-center w-full max-w-md rounded py-10 gap-6">
+                <FaCheck className='text-navBlue text-4xl lg:text-6xl ' />
+                <form className="flex flex-col items-center justify-between w-full max-w-md pt-10 rounded gap-4 ">
                     <div className='relative w-[250px] h-full'>
                         <input
                             className="shadow-lg appearance-none border-4 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight  focus:outline-none focus:shadow-outline p-4 border-greyWhite outline-none "
