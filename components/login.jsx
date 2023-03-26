@@ -41,7 +41,7 @@ function Login({ setLogin }) {
                 <form className="flex flex-col items-center justify-between w-full max-w-md pt-10 rounded gap-4 ">
                     <div className='relative w-[250px] h-full'>
                         <input
-                            className="shadow-lg appearance-none border-4 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight  focus:outline-none focus:shadow-outline p-4 border-greyWhite outline-none "
+                            className="shadow-lg  border-4 rounded w-full py-2 px-3 text-gray-700 mb-3 appearance-none leading-tight focus:outline-none focus:shadow-outline p-4 border-greyWhite outline-none "
                             id="email"
                             type="email"
                             value={email}

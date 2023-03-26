@@ -79,13 +79,13 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
             <input type="text" placeholder='TITLE'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="px-4 py-2 border-b-2 rounded-t-xl border-lightGrey shadow-md focus:outline-none"
+                className="px-4 py-2 border-b-2 rounded-t-xl border-lightGrey shadow-md focus:outline-none appearance-none leading-tight focus:shadow-outline"
                 name='title'
                 ref={titleRef}
                 onFocus={() => scrollToRef(titleRef)}
             />
             <textarea
-                className="w-full px-4 py-2 text-black focus:outline-none focus:border-navBlue"
+                className="w-full px-4 py-2 text-black focus:outline-none appearance-none leading-tight focus:shadow-outline focus:border-navBlue"
                 rows="4"
                 placeholder="Enter your text here"
                 value={textAreaValue}
@@ -110,7 +110,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 value={
                                     selectedDate ? getSelectedDate(selectedDate) : 'End Date'
                                 }
-                                className="text-center w-14 sm:w-24  mb-1 hover:bg-silver bg-transparent caret-transparent text-[10px] sm:text-sm font-medium  focus:outline-none cursor-pointer"
+                                className="text-center w-14 sm:w-24  mb-1 hover:bg-silver bg-transparent caret-transparent text-[10px] sm:text-sm font-medium focus:outline-none appearance-none leading-tight focus:shadow-outline cursor-pointer"
                                 dateFormat="dd/MM/yyyy"
                                 minDate={new Date()}
                                 highlightDates={[
