@@ -9,7 +9,7 @@ function Landing() {
     const [login, setLogin] = useState(false)
 
     return (
-        <div className='flex flex-col justify-center py-8 relative w-[85%] lg:w-[80%] m-auto h-full'>
+        <div className='flex flex-col justify-center mt-8 relative w-[85%] lg:w-[80%] m-auto h-full'>
             <FaCheck className='text-navBlue text-[100px]s' />
             <div className='flex flex-col justify-center w-full m-auto h-full  border-navBlue'>
                 <div className='flex items-center justify-between '>
