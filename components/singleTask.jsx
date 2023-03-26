@@ -11,7 +11,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
     const [showUpDelete, setShowUpDelete] = useState(false)
     const [isMax, setIsMax] = useState(false);
     const [isDone, setIsDone] = useState(false)
-    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs } = useCrudContext();
+    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs,  setCountDoneTasks } = useCrudContext();
 
     useEffect(() => {
         if (typeof singleEmail !== "undefined" && singleEmail.length >= 70) {
@@ -76,6 +76,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                                     setTimeout(() => {
                                         setAllJobs((current) => current.filter((e) => e.id !== singleId))
                                     }, 1000);
+                                    setCountDoneTasks((prev) => prev + 1)
                                 }}
                             >
                                 <TiTick className={`${isDone ? `text-white ` : `text-black opacity-50 hover:text-green`}  text-2xl  text-center m-auto`} />

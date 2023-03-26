@@ -4,7 +4,7 @@ import { useCrudContext } from '@/components/context';
 import { AiOutlineClose } from 'react-icons/ai'
 
 function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
-    const { doneTasks, setDoneTasks, allJobs, setAllJobs } = useCrudContext();
+    const { doneTasks, setDoneTasks, allJobs, setAllJobs, setCountDoneTasks } = useCrudContext();
 
     function arrangeDoneCheck() {
         setDoneTasks(
@@ -43,7 +43,7 @@ function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate,
                     </span>
                     <button
                         className='text-lightRed hover:bg-grey p-2 rounded'
-                        onClick={() => { arrangeDoneCheck(), undoTask() }}
+                        onClick={() => { arrangeDoneCheck(), undoTask(), setCountDoneTasks((prev) => prev - 1) }}
                     >
                         Undo
                     </button>

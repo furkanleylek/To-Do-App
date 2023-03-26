@@ -19,12 +19,14 @@ function Navbar() {
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? (
-                        <AiOutlineClose className='text-red' onClick={() => setIsOpen(false)} />
+                        <AiOutlineClose className='text-red bg-lightGrey hover:scale-105 rounded-full p-2' onClick={() => setIsOpen(false)} />
                     ) : (
-                        <HiMenuAlt2 className='text-navBlue' onClick={() => setIsOpen(true)} />
+                        <HiMenuAlt2 className='text-navBlue hover:scale-105 ' onClick={() => setIsOpen(true)} />
                     )}
                 </button>
-                <Image src="/favicon.ico" alt="logo" width="64" height="64" />
+                {/* {!isOpen &&
+                    <Image src="/favicon.ico" alt="logo" width="64" height="64" />
+                } */}
                 <IoPersonCircle className='text-2xl text-navBlue' />
             </div>
             {/* Sidebar - Open - Close */}

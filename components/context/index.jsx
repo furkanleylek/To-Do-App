@@ -13,6 +13,7 @@ function Provider({ children }) {
     const [hoverTask, setHoverTask] = useState(false)
     const [addTask, setAddTask] = useState(false)
     const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
+    const [countDoneTasks, setCountDoneTasks] = useState(0)
     const data = {
         allJobs,
         setAllJobs,
@@ -24,6 +25,8 @@ function Provider({ children }) {
         setCheckMaxDescLength,
         doneTasks,
         setDoneTasks,
+        countDoneTasks,
+        setCountDoneTasks
     }
 
     return (

@@ -22,8 +22,6 @@ function HomeComponent() {
                             </div>
                         ))
                     }
-                    <h1>ALL JOBS : {allJobs.length}</h1>
-                    <h1>DONE JOBS :{doneTasks.length}</h1>
                     {
                         !addTask && (
                             <button className='flex justify-start items-center gap-3 py-4 w-[100px]'

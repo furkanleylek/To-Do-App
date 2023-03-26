@@ -1,11 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useCrudContext } from '@/components/context';
-import { IoStatsChart } from 'react-icons/io'
 function Stats() {
 
-  const { doneTasks, setDoneTasks } = useCrudContext();
-  console.log(doneTasks)
+  const { doneTasks, setDoneTasks, countDoneTasks, } = useCrudContext();
   return (
     <div>
       {
@@ -17,7 +15,7 @@ function Stats() {
       }
       <div>
         <h3>doneTasks</h3>
-        <span>{doneTasks.length}</span>
+        <span>{countDoneTasks}</span>
       </div>
     </div>
   );
