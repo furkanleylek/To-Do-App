@@ -8,6 +8,7 @@ import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 import { IoMdSend } from 'react-icons/io'
 import TaskForm from './taskForm';
 import UndoModal from '../modals/undoModal';
+
 function HomeComponent() {
 
     const { allJobs, hoverTask, setHoverTask, addTask, setAddTask, doneTasks } = useCrudContext();
@@ -24,14 +25,17 @@ function HomeComponent() {
                     }
                     {
                         !addTask && (
-                            <button className='flex justify-start items-center gap-3 py-4 w-[100px]'
-                                onMouseOver={() => setHoverTask(true)}
-                                onMouseLeave={() => setHoverTask(false)}
-                                onClick={() => setAddTask(true)}
-                            >
-                                <AiOutlinePlus className={hoverTask ? `bg-darkRed rounded-full cursor-pointer text-white text-xl` : `pointer-events-none text-red text-xl`} />
-                                <span className={hoverTask ? `text-red` : `text-grey`}>Add Task</span>
-                            </button>
+                            <div className='flex flex-col w-full h-full'>
+                                <span className='border-t-2 border-lightGrey w-full h-1 mt-2' ></span>
+                                <button className='flex justify-start items-center gap-3 py-4 w-[100px]'
+                                    onMouseOver={() => setHoverTask(true)}
+                                    onMouseLeave={() => setHoverTask(false)}
+                                    onClick={() => setAddTask(true)}
+                                >
+                                    <AiOutlinePlus className={hoverTask ? `bg-darkRed rounded-full cursor-pointer text-white text-xl` : `pointer-events-none text-red text-xl`} />
+                                    <span className={hoverTask ? `text-red` : `text-grey`}>Add Task</span>
+                                </button>
+                            </div>
                         )
                     }
                     {

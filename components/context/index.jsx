@@ -14,6 +14,9 @@ function Provider({ children }) {
     const [addTask, setAddTask] = useState(false)
     const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
     const [countDoneTasks, setCountDoneTasks] = useState(0)
+
+    const [isLogin, setIsLogin] = useState(false)
+
     const data = {
         allJobs,
         setAllJobs,
@@ -26,7 +29,9 @@ function Provider({ children }) {
         doneTasks,
         setDoneTasks,
         countDoneTasks,
-        setCountDoneTasks
+        setCountDoneTasks,
+        isLogin,
+        setIsLogin,
     }
 
     return (

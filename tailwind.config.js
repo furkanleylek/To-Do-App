@@ -9,7 +9,10 @@ module.exports = {
     extend: {
       boxShadow: {
         'modal': '1px 1px 5px 1px rgba(0.1, 0.1, 0.1, 0.1)',
-      }
+      },
+      fontFamily: {
+        mono: ['var(--font-roboto-mono)'],
+      },
     },
     screens: {
       'exsm': '460px',

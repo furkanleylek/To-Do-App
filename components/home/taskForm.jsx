@@ -4,7 +4,6 @@ import { useCrudContext } from '@/components/context';
 import { AiOutlineClose } from 'react-icons/ai'
 import { MdDateRange, MdLabelImportant } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
-import { BsFlag } from 'react-icons/bs'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -76,10 +75,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
 
     return (
         <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 max-w-xl '>
-            <input type="text" placeholder='TITLE'
+            <input
+                type="text"
+                placeholder='Task name'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="px-4 py-2 border-b-2 rounded-t-xl border-lightGrey shadow-md focus:outline-none appearance-none leading-tight focus:shadow-outline"
+                className="px-4 py-2 font-bold  border-b-2 rounded-t-xl text-navBlue border-lightGrey shadow-md focus:outline-none appearance-none leading-tight focus:shadow-outline"
                 name='title'
                 ref={titleRef}
                 onFocus={() => scrollToRef(titleRef)}
@@ -96,7 +97,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
             <div className='flex flex-wrap items-center justify-between border-t-2 pt-2 bg-white rounded-b-[20px] border-lightGrey px-2'>
                 <div className='flex items-center mb-2 gap-4 sm:gap-8 bg-white px-3 flex-wrap '>
                     {/* date */}
-                    <div className="flex h-8 border-2 border-grey hover:bg-silver focus:bg-silver px-1 sm:px-0 rounded items-center justify-center ">
+                    <div className="flex h-8 border-2 border-lightGrey hover:bg-silver focus:bg-silver px-1 sm:px-0 rounded items-center justify-center ">
                         <MdDateRange className='text-red text-md sm:text-xl sm:ml-2' />
                         <div className="rounded-lg">
                             <DatePicker
@@ -131,7 +132,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                     {/* important */}
 
                     <button
-                        className={`${isImportant ? `bg-important border-transparent` : `hover:bg-silver border-2 border-grey`} transition-all flex h-8 px-1 sm:px-0 sm:min-w-[128px] rounded items-center justify-center gap-2`}
+                        className={`${isImportant ? `bg-important border-important` : `hover:bg-silver  border-lightGrey`} border-2 transition-all flex h-8 px-1 sm:px-0 sm:min-w-[128px] rounded items-center justify-center gap-2`}
                         onClick={() => setIsImportant((prev) => !prev)}
                     >
                         <MdLabelImportant className={`${isImportant ? `text-white` : `text-important`} text-md sm:text-2xl`} />

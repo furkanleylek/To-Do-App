@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Delete from './crud/delete'
 import Update from './crud/update'
-import { useCrudContext } from '@/components/context';
+import { useCrudContext } from './context'
 import { TiTick } from 'react-icons/ti'
 import { MdDateRange } from 'react-icons/md'
 import TaskForm from './home/taskForm'
@@ -11,7 +11,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
     const [showUpDelete, setShowUpDelete] = useState(false)
     const [isMax, setIsMax] = useState(false);
     const [isDone, setIsDone] = useState(false)
-    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs,  setCountDoneTasks } = useCrudContext();
+    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs, setCountDoneTasks } = useCrudContext();
 
     useEffect(() => {
         if (typeof singleEmail !== "undefined" && singleEmail.length >= 70) {

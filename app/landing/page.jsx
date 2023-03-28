@@ -10,7 +10,7 @@ function Landing() {
 
     return (
         <div className='flex flex-col justify-center mt-8 relative w-[85%] lg:w-[80%] m-auto h-full'>
-            <FaCheck className='text-navBlue text-[100px]s' />
+            <FaCheck className='text-navBlue text-[50px]' />
             <div className='flex flex-col justify-center w-full m-auto h-full  border-navBlue'>
                 <div className='flex items-center justify-between '>
                     <div className='flex flex-col items-start justify-center gap-6'>
@@ -22,7 +22,9 @@ function Landing() {
                             Login / Register
                         </button>
                     </div>
-                    <Image className='hidden lg:block border-red' src="/favicon.ico" alt="logo" width="64" height="64" />
+                    <div className='w-[1200px] h-[500px] relative'>
+                        <Image className='hidden lg:block rounded object-cover relative shadow-2xl shadow-lightGrey' src="/landing.jpg" alt="logo" fill />
+                    </div>
                 </div>
             </div>
             {login && (
