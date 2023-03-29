@@ -4,7 +4,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { FaCheck } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { useCrudContext } from '@/components/context';
-import Link from 'next/link';
+import { setCookie } from 'cookies-next'
+
 function Login({ setLogin }) {
 
     const [users, setUsers] = useState([]);
@@ -36,7 +37,7 @@ function Login({ setLogin }) {
                 setError('');
                 const newUsers = [...users, newUser]
                 localStorage.setItem('users', JSON.stringify(newUsers))
-                localStorage.setItem("currentId", JSON.stringify(newUser.id))
+                setCookie("currentId", newUser.id)
                 setUsers(newUsers)
                 setEmail('')
                 setName('')
@@ -51,7 +52,7 @@ function Login({ setLogin }) {
             usersList.map((user) => {
                 if (user.email == email && user.password == password) {
                     console.log("user:", user.name)
-                    localStorage.setItem("currentId", JSON.stringify(user.id))
+                    setCookie("currentId", user.id)
                     setIsLogin(true)
                 } else if (user.email !== email) {
                     setError(' This email is not registered.');

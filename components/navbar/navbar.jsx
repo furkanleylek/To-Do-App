@@ -6,6 +6,7 @@ import { IoPersonCircle } from 'react-icons/io5'
 import { AiOutlineClose, AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai'
 import Menu from './menu'
 import OutsideClickHandler from 'react-outside-click-handler'
+import { getCookie, deleteCookie } from 'cookies-next'
 
 function Navbar() {
 
@@ -18,7 +19,7 @@ function Navbar() {
 
     useEffect(() => {
         usersRef.current = JSON.parse(window.localStorage.getItem("users"))
-        setCurrentId(() => JSON.parse(window.localStorage.getItem('currentId')))
+        setCurrentId(() => getCookie('currentId'))
     }, [])
 
     const currentName = usersRef.current?.map((user) => {
@@ -52,7 +53,7 @@ function Navbar() {
                         }
                     </div>
                     {logOut &&
-                        <span className='w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { localStorage.removeItem('currentId'), router.push('/landing') }}>
+                        <span className='w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('currentId'), router.push('/landing') }}>
                             Log Out
                         </span>
                     }

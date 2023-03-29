@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import LoginModal from '@/components/modals/loginModal'
+import LoginModal from '@/components/login/loginModal'
 import { FaCheck } from 'react-icons/fa'
 
 function Landing() {

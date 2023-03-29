@@ -1,20 +1,13 @@
-'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { redirect } from 'next/navigation'
-import { useCrudContext } from './context'
+import { cookies } from 'next/headers'
 function CheckLogin() {
 
-    const { isLogin } = useCrudContext()
-
-    useEffect(() => {
-        if (JSON.parse(window.localStorage.getItem('currentId')) == undefined) {
-            redirect('/landing')
-        }
-    }, [])
-    // if (!isLogin) {
-    //     redirect('/landing')
-    // }
-
+    const cookieStore = cookies()
+    const hasCookie = cookieStore.has('currentId')
+    if (!hasCookie) {
+        redirect('/landing')
+    }
 }
 
 export default CheckLogin
