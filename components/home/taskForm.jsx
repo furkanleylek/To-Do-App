@@ -23,36 +23,9 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     const [textAreaValue, setTextAreaValue] = useState(typeof prevDesc == "undefined" ? '' : prevDesc);
     const [selectedDate, setSelectedDate] = useState(null)
     const [isImportant, setIsImportant] = useState(prevImportant)
-    const titleRef = useRef(null);
-    const textAreRef = useRef(null);
-    const dateRef = useRef(null);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
     let key = generateKey()
-
-    const scrollToRef = (ref) => {
-        if (isKeyboardOpen) {
-            scroll.scrollTo(ref.current.offsetTop - 16);
-        }
-    };
-
-    useEffect(() => {
-        const handleFocus = () => {
-            setIsKeyboardOpen(true);
-        };
-
-        const handleBlur = () => {
-            setIsKeyboardOpen(false);
-        };
-
-        window.addEventListener("focusin", handleFocus);
-        window.addEventListener("focusout", handleBlur);
-
-        return () => {
-            window.removeEventListener("focusin", handleFocus);
-            window.removeEventListener("focusout", handleBlur);
-        };
-    }, []);
 
     function getSelectedDate(value) {
         const today = new Date();
@@ -74,16 +47,14 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 max-w-xl '>
+        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 max-w-xl  mb-[250px]'>
             <input
                 type="text"
                 placeholder='Task name'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="px-4 py-2 font-bold  border-b-2 rounded-t-xl text-navBlue border-lightGrey shadow-md focus:outline-none appearance-none leading-tight focus:shadow-outline"
+                className="px-4 py-2 font-bold  border-b-2 text-navBlue rounded-t-xltext-navBlue border-lightGrey shadow-md outline-none focus:outline-none appearance-none leading-tight focus:shadow-outline"
                 name='title'
-                ref={titleRef}
-                onFocus={() => scrollToRef(titleRef)}
             />
             <textarea
                 className="w-full px-4 py-2 text-black focus:outline-none appearance-none leading-tight focus:shadow-outline focus:border-navBlue"
@@ -91,8 +62,6 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                 placeholder="Enter your text here"
                 value={textAreaValue}
                 onChange={(e) => setTextAreaValue(e.target.value)}
-                ref={textAreRef}
-                onFocus={() => scrollToRef(textAreRef)}
             />
             <div className='flex flex-wrap items-center justify-between border-t-2 pt-2 bg-white rounded-b-[20px] border-lightGrey px-2'>
                 <div className='flex items-center mb-2 gap-4 sm:gap-8 bg-white px-3 flex-wrap '>
@@ -105,8 +74,6 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 onChange={(date) => {
                                     setSelectedDate(date);
                                 }}
-                                ref={dateRef}
-                                onFocus={() => scrollToRef(dateRef)}
                                 calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
                                 value={
                                     selectedDate ? getSelectedDate(selectedDate) : 'End Date'

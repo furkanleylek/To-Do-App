@@ -25,7 +25,7 @@ function HomeComponent() {
                     }
                     {
                         !addTask && (
-                            <div className='flex flex-col w-full h-full'>
+                            <div className='flex flex-col w-full h-full mb-[200px]'>
                                 <span className='border-t-2 border-lightGrey w-full h-1 mt-2' ></span>
                                 <button className='flex justify-start items-center gap-3 py-4 w-[100px]'
                                     onMouseOver={() => setHoverTask(true)}

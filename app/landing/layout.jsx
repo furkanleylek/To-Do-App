@@ -1,6 +1,5 @@
 import '@/styles/globals.css'
 import Provider from '@/components/context'
-
 export const metadata = {
     title: 'To Do App'
 }
