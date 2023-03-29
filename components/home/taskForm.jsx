@@ -24,8 +24,21 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     const [selectedDate, setSelectedDate] = useState(null)
     const [isImportant, setIsImportant] = useState(prevImportant)
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+    const [datePickerPos, setDatePickerPos] = useState({}); // DatePicker'ın konumu
+    const inputRef = useRef(null);
 
     let key = generateKey()
+
+
+    const handleClick = (e) => {
+        // Tıklanan elemanın koordinatları
+        const clickedElementCoords = e.target.getBoundingClientRect();
+        // DatePicker'ın yeni konumu
+        setDatePickerPos({
+            top: clickedElementCoords.top - 10, // Yukarıya doğru 10 piksel boşluk
+            left: clickedElementCoords.left, // Tıklanan elemanın sol tarafına hizalanır
+        });
+    };
 
     function getSelectedDate(value) {
         const today = new Date();
@@ -74,6 +87,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 onChange={(date) => {
                                     setSelectedDate(date);
                                 }}
+                                onClick={handleClick}
                                 calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
                                 value={
                                     selectedDate ? getSelectedDate(selectedDate) : 'End Date'
