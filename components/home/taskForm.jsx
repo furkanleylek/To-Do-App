@@ -33,8 +33,10 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     let key = generateKey()
 
     async function handleData() {
+
+
         try {
-            const response = await fetch('https://todo-app-nextjs13.netlify.app/api/tasks', {
+            const response = await fetch('/api/tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

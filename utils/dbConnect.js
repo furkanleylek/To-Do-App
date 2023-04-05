@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-// const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_URI = "mongodb+srv://furkanyasin:fApVirXJLFb6SzhG@cluster0.hiivsle.mongodb.net/todo-app?retryWrites=true&w=majority"
+const MONGODB_URI = process.env.MONGODB_URI;
 
 async function dbConnect() {
 

@@ -24,7 +24,7 @@ function Login({ setLogin }) {
 
         e.preventDefault()
         try {
-            const response = await fetch('https://todo-app-nextjs13.netlify.app/api/users', {
+            const response = await fetch(`/api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
