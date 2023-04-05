@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useEffect, useContext } from 'react'
 
 const Context = createContext()
 
@@ -7,7 +7,7 @@ const Context = createContext()
 function Provider({ children }) {
 
     const [allJobs, setAllJobs] = useState([
-        { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", important: false, isUpdate: false, isCheck: false }
+        // { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", important: false, isUpdate: false, isCheck: false }
     ])
     const [doneTasks, setDoneTasks] = useState([])
     const [hoverTask, setHoverTask] = useState(false)

@@ -25,7 +25,7 @@ function Menu({ setIsOpen }) {
                             <span className='text-xl'><FaList /></span>
                             All Tasks
                         </Link>
-                        <Link className={` flex gap-5 items-center justify-start test-xl font-bold text-white hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/addjob" onClick={() => setIsOpen(() => false)}>
+                        <Link className={` flex gap-5 items-center justify-start test-xl font-bold text-white hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/addtask" onClick={() => setIsOpen(() => false)}>
                             <span className='text-2xl'><MdPostAdd /></span>
                             Add Task
                         </Link>

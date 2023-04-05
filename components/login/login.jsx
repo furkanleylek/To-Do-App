@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useCrudContext } from '@/components/context';
 import { setCookie } from 'cookies-next'
 
+
 function Login({ setLogin }) {
 
     const [users, setUsers] = useState([]);
@@ -19,9 +20,29 @@ function Login({ setLogin }) {
     const router = useRouter()
     console.log("isLogin:", isLogin)
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
 
         e.preventDefault()
+        try {
+            const response = await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password
+                })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            // do something with the response, such as displaying a success message
+        } catch (error) {
+            console.error(error);
+        }
         if (register) {
             const newUserId = Math.random().toString(36).substring(7);
             const newUser = {

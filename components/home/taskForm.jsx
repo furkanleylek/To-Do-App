@@ -17,6 +17,9 @@ function generateKey() {
     return retVal;
 }
 
+
+
+
 function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMaxDescLength } = useCrudContext();
     const [title, setTitle] = useState(typeof prevTitle == "undefined" ? '' : prevTitle)
@@ -29,6 +32,33 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
 
     let key = generateKey()
 
+    async function handleData() {
+        try {
+            const response = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: key,
+                    desc:textAreaValue,
+                    title,
+                    date:selectedDate,
+                    important : isImportant,
+                    isUpdate,
+                    isCheck: false,
+                })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            // do something with the response, such as displaying a success message
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     const handleClick = (e) => {
         // Tıklanan elemanın koordinatları
@@ -39,6 +69,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
             left: clickedElementCoords.left, // Tıklanan elemanın sol tarafına hizalanır
         });
     };
+
 
     function getSelectedDate(value) {
         const today = new Date();
@@ -141,7 +172,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 {
                                     setAllJobs(
                                         allJobs.map((job) => {
-                                            return job.id == updateId ? { ...job, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
+                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
                                         })
                                     )
                                     setAddTask(false)
@@ -159,7 +190,8 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                         <button
                             onClick={() => {
                                 {
-                                    setAllJobs(oldArray => [...oldArray, { id: key, email: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
+                                    handleData()
+                                    setAllJobs(oldArray => [...oldArray, { id: key, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
                                     setAddTask(false)
                                     setHoverTask(false)
                                     setCheckMaxDescLength(true)
