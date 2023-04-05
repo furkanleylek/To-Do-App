@@ -42,10 +42,10 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                 body: JSON.stringify({
                     id: key,
                     desc: textAreaValue,
-                    title,
+                    title: title,
                     date: selectedDate,
                     important: isImportant,
-                    isUpdate,
+                    isUpdate: false,
                     isCheck: false,
                 })
             });

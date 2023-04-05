@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URI = process.env.MONGODB_URI;
+// const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = "mongodb+srv://furkanyasin:fApVirXJLFb6SzhG@cluster0.hiivsle.mongodb.net/todo-app?retryWrites=true&w=majority"
 
 async function dbConnect() {
 
@@ -17,7 +18,7 @@ async function dbConnect() {
         console.log('MongoDB database connection established successfully!');
     } catch (error) {
         console.error('MongoDB connection error:', error);
-        process.exit(1);
+        // process.exit(1);
     }
 
 }
