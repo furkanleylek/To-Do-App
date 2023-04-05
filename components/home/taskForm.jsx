@@ -34,17 +34,17 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
 
     async function handleData() {
         try {
-            const response = await fetch('/api/tasks', {
+            const response = await fetch('https://todo-app-nextjs13.netlify.app/api/tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     id: key,
-                    desc:textAreaValue,
+                    desc: textAreaValue,
                     title,
-                    date:selectedDate,
-                    important : isImportant,
+                    date: selectedDate,
+                    important: isImportant,
                     isUpdate,
                     isCheck: false,
                 })

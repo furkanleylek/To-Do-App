@@ -12,12 +12,6 @@ import UndoModal from '../modals/undoModal';
 function HomeComponent() {
     const { allJobs, setAllJobs, hoverTask, setHoverTask, addTask, setAddTask, doneTasks } = useCrudContext();
 
-    async function test() {
-        const response = await fetch('/api/users');
-        const data = await response.json();
-        console.log(data);
-    }
-
     return (
         <ClientOnly >
             <div className='flex flex-col items-center justify-center m-auto w-full  '>
@@ -44,7 +38,6 @@ function HomeComponent() {
                             </div>
                         )
                     }
-                    <h1 onClick={test}>sa</h1>
                     {
                         addTask && (
                             <TaskForm />
