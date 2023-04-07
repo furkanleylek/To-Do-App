@@ -5,12 +5,12 @@ import { FaCheck } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { useCrudContext } from '@/components/context';
 import { setCookie } from 'cookies-next'
-
-
+import { jwtToken } from './jwtToken'
 function Login({ setLogin }) {
 
     const [users, setUsers] = useState([]);
     const [name, setName] = useState('');
+    const [userId, setUserId] = useState('123')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [register, setRegister] = useState(false)
@@ -18,75 +18,64 @@ function Login({ setLogin }) {
     const { isLogin, setIsLogin } = useCrudContext()
 
     const router = useRouter()
-    console.log("isLogin:", isLogin)
 
     async function handleSubmit(e) {
-
         e.preventDefault()
-        try {
-            const response = await fetch(`/api/users`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    password
-                })
-            });
 
-            const data = await response.json();
-            console.log(data);
-
-            // do something with the response, such as displaying a success message
-        } catch (error) {
-            console.error(error);
-        }
         if (register) {
-            const newUserId = Math.random().toString(36).substring(7);
-            const newUser = {
-                key: newUserId,
-                id: newUserId,
-                name: name,
-                email: email,
-                password: password
-            };
-            if (!(users.every((e) => { return e.email !== email }))) {
-                setError('This e-mail has already been registered.');
-            } else {
-                setError('');
-                const newUsers = [...users, newUser]
-                localStorage.setItem('users', JSON.stringify(newUsers))
-                setCookie("currentId", newUser.id)
-                setUsers(newUsers)
-                setEmail('')
-                setName('')
-                setPassword('')
-                setIsLogin(true)
+            // register
+            try {
+                const token = await jwtToken(name, email)
+                const response = await fetch(`/api/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: token,
+                        name,
+                        email,
+                        password,
+                    })
+                });
+                const data = await response.json();
+                if (data.errorCode == "EMAIL_ALREADY_IN_USE") {
+                    setError(data.message);
+                }
+                if (response.status === 200) {
+                    setCookie('token', token)
+                    setIsLogin(true)
+                }
+            } catch (error) {
+                console.error(error);
             }
         } else {
-            const usersList = JSON.parse(localStorage.getItem('users')) || [];
-            if (usersList.length == 0) {
-                setError(' This email is not registered.');
-            }
-            usersList.map((user) => {
-                if (user.email == email && user.password == password) {
-                    console.log("user:", user.name)
-                    setCookie("currentId", user.id)
+            // login
+            try {
+                const response = await fetch(`/api/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                });
+                const data = await response.json();
+                if (data.errorCode == "EMAIL_IS_NOT_REGISTERED") {
+                    setError(data.message);
+                }
+                if (data.errorCode == "EMAIL_OR_PASSWORD_WRONG") {
+                    setError(data.message);
+                }
+                if (response.status === 200) {
+                    setCookie('token', data.token)
                     setIsLogin(true)
-                } else if (user.email !== email) {
-                    setError(' This email is not registered.');
                 }
-                else {
-                    setError('Email or password is incorrect ! ');
-                }
-            })
-
-            // Formu temizle
-            setName('')
-            setEmail('');
-            setPassword('');
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 

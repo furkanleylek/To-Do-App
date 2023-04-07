@@ -6,6 +6,9 @@ import { MdDateRange, MdLabelImportant } from 'react-icons/md'
 import { IoMdSend } from 'react-icons/io'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { getCookie } from 'cookies-next'
+
+
 
 function generateKey() {
     var length = 8,
@@ -16,7 +19,6 @@ function generateKey() {
     }
     return retVal;
 }
-
 
 
 
@@ -32,9 +34,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
 
     let key = generateKey()
 
+    useEffect(() => {
+        window.token = getCookie('token')
+        console.log(token)
+    })
+
     async function handleData() {
-
-
         try {
             const response = await fetch('/api/tasks', {
                 method: 'POST',
@@ -42,6 +47,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    user_id: token,
                     id: key,
                     desc: textAreaValue,
                     title: title,
@@ -193,7 +199,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                             onClick={() => {
                                 {
                                     handleData()
-                                    setAllJobs(oldArray => [...oldArray, { id: key, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
+                                    setAllJobs(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
                                     setAddTask(false)
                                     setHoverTask(false)
                                     setCheckMaxDescLength(true)

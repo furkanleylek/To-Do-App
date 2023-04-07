@@ -53,7 +53,7 @@ function Navbar() {
                         }
                     </div>
                     {logOut &&
-                        <span className='w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('currentId'), router.push('/landing') }}>
+                        <span className='w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), router.push('/landing') }}>
                             Log Out
                         </span>
                     }

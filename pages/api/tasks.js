@@ -5,12 +5,11 @@ const handlerTasks = async (req, res) => {
     await dbConnect()
 
     const { method } = req
-
     if (method === "GET") {
         try {
-            const tasks = await Task.find()
+            const token = req.cookies.token
+            const tasks = await Task.find({ user_id: token })
             res.status(200).json(tasks)
-            console.log(tasks)
         } catch (err) {
             console.log(err)
         }

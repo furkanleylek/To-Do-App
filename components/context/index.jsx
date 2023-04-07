@@ -1,14 +1,14 @@
 'use client'
 import React, { createContext, useState, useEffect, useContext } from 'react'
-
+import { getAllTasks } from '@/services/getTasks'
 const Context = createContext()
 
 
 function Provider({ children }) {
 
-    const [allJobs, setAllJobs] = useState([
-        // { id: 1, email: "asdadads@hotmail.com", title: "main", date: "01.01.01", important: false, isUpdate: false, isCheck: false }
-    ])
+
+
+    const [allJobs, setAllJobs] = useState([])
     const [doneTasks, setDoneTasks] = useState([])
     const [hoverTask, setHoverTask] = useState(false)
     const [addTask, setAddTask] = useState(false)
@@ -16,6 +16,9 @@ function Provider({ children }) {
     const [countDoneTasks, setCountDoneTasks] = useState(0)
 
     const [isLogin, setIsLogin] = useState(false)
+
+
+
 
     const data = {
         allJobs,

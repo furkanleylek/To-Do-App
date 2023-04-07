@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-    id: {
+    user_id: {
         type: String,
         required: true,
-        unique: true
+    },
+    id: {
+        type: String
     },
     desc: {
         type: String,
         required: true,
     },
-
     title: {
         type: String,
         required: true
@@ -23,12 +24,12 @@ const taskSchema = new mongoose.Schema({
     },
     isUpdate: {
         type: Boolean
-
     },
     isCheck: {
         type: Boolean
 
     },
+
 }, { timestamps: true });
 
 const Task = mongoose.models.Task || mongoose.model('Task', taskSchema);

@@ -8,9 +8,29 @@ import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 import { IoMdSend } from 'react-icons/io'
 import TaskForm from './taskForm';
 import UndoModal from '../modals/undoModal';
-
+import { getAllTasks } from '@/services/getTasks';
 function HomeComponent() {
     const { allJobs, setAllJobs, hoverTask, setHoverTask, addTask, setAddTask, doneTasks } = useCrudContext();
+    useEffect(() => {
+        async function handleData() {
+            try {
+                const response = await fetch('/api/tasks', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                setAllJobs(data)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        handleData()
+    }, [])
 
     return (
         <ClientOnly >

@@ -3,7 +3,6 @@ import Navbar from '@/components/navbar/navbar'
 import Provider from '@/components/context'
 import SideBar from '@/components/sidebar'
 import { Roboto_Mono } from 'next/font/google';
-import CheckLogin from '@/components/checkLogin';
 
 const roboto_mono = Roboto_Mono({
   subsets: ['latin'],
@@ -22,7 +21,6 @@ export default function RootLayout({ children }) {
       <head />
       <body className='flex flex-col bg-main md:flex-row w-screen h-screen '>
         <Provider>
-          <CheckLogin />
           <div className='hidden md:flex'>
             <SideBar />
           </div>
