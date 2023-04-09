@@ -15,11 +15,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7a7c7f;
+  background: #a3a2a2;
   border-radius: 10px;
   box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
 }
@@ -28,7 +28,11 @@ body {
   background: #D8DCE3;
 }
 
-
+@media screen and (max-width: 600px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+}
 
 .loader {
   position: relative;
