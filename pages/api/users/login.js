@@ -17,7 +17,7 @@ const handler = async (req, res) => {
                 return res.status(401).json({
                     error: true,
                     message: 'This email is not registered',
-                    errorCode: 'EMAIL_IS_NOT_REGISTERED'
+                    errorCode: 'EMAIL_IS_NOT_REGISTERED',
                 });
 
             }
@@ -27,12 +27,13 @@ const handler = async (req, res) => {
                 return res.status(401).json({
                     error: true,
                     message: 'Email or password is not correct .',
-                    errorCode: 'EMAIL_OR_PASSWORD_WRONG'
+                    errorCode: 'EMAIL_OR_PASSWORD_WRONG',
                 });
             }
             if (req.body.email === userExists.email && req.body.password === userExists.password) {
                 res.status(200).json({
-                    token: userExists.user_id
+                    token: userExists.user_id,
+                    name: userExists.name,
                 })
             }
 

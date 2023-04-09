@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FaCheck } from 'react-icons/fa'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useCrudContext } from '@/components/context';
 import { setCookie } from 'cookies-next'
 import { jwtToken } from './jwtToken'
+import LoadingComponent from '../loading'
 function Login({ setLogin }) {
 
     const [users, setUsers] = useState([]);
@@ -15,13 +16,14 @@ function Login({ setLogin }) {
     const [password, setPassword] = useState('');
     const [register, setRegister] = useState(false)
     const [error, setError] = useState('');
-    const { isLogin, setIsLogin } = useCrudContext()
+    const [loading, setLoading] = useState(false)
+    const { isLoadingShow, setIsLoadingShow } = useCrudContext()
 
     const router = useRouter()
+    const searchParams = useSearchParams()
 
     async function handleSubmit(e) {
         e.preventDefault()
-
         if (register) {
             // register
             try {
@@ -43,10 +45,16 @@ function Login({ setLogin }) {
                     setError(data.message);
                 }
                 if (response.status === 200) {
+                    setLoading(true);
                     setCookie('token', token)
-                    setIsLogin(true)
+                    setCookie('username', name)
+                    const nextUrl = searchParams.get('next')
+                    router.push(nextUrl ? nextUrl : '/').then(() => {
+                        setLoading(false);
+                    });
                 }
             } catch (error) {
+                setLoading(false);
                 console.error(error);
             }
         } else {
@@ -70,21 +78,26 @@ function Login({ setLogin }) {
                     setError(data.message);
                 }
                 if (response.status === 200) {
+                    setLoading(true);
                     setCookie('token', data.token)
-                    setIsLogin(true)
+                    setCookie('username', data.name)
+                    const nextUrl = searchParams.get('next')
+                    router.push(nextUrl ? nextUrl : '/').then(() => {
+                        setLoading(false);
+                    });
                 }
             } catch (error) {
                 console.error(error);
             }
         }
     }
-
     useEffect(() => {
-        if (isLogin) {
-            router.push("/")
+        if (loading) {
+            setIsLoadingShow(true)
+        } else {
+            setIsLoadingShow(false)
         }
-    }, [isLogin])
-
+    }, [loading]);
     useEffect(() => {
         const emailId = document.getElementById('email')
         const emailSpanId = document.getElementById('emailSpan')

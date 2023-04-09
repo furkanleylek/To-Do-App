@@ -1,6 +1,5 @@
 'use client'
 import React, { createContext, useState, useEffect, useContext } from 'react'
-import { getAllTasks } from '@/services/getTasks'
 const Context = createContext()
 
 
@@ -14,9 +13,7 @@ function Provider({ children }) {
     const [addTask, setAddTask] = useState(false)
     const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
     const [countDoneTasks, setCountDoneTasks] = useState(0)
-
-    const [isLogin, setIsLogin] = useState(false)
-
+    const [isLoadingShow, setIsLoadingShow] = useState(false)
 
 
 
@@ -33,8 +30,8 @@ function Provider({ children }) {
         setDoneTasks,
         countDoneTasks,
         setCountDoneTasks,
-        isLogin,
-        setIsLogin,
+        isLoadingShow,
+        setIsLoadingShow,
     }
 
     return (

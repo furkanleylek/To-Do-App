@@ -8,9 +8,8 @@ export async function jwtToken(email, name) {
     }).setProtectedHeader({
         alg: 'HS256'
     }).setIssuedAt()
-        .setExpirationTime('1d')
+        .setExpirationTime('10y')
         .sign(getJwtSecretKey())
-
     return token
 }
 

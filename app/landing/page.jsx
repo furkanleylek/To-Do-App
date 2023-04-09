@@ -2,11 +2,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import LoginModal from '@/components/login/loginModal'
+import LoadingComponent from '@/components/loading'
 import { FaCheck } from 'react-icons/fa'
+import { useCrudContext } from '@/components/context';
 
 function Landing() {
 
     const [login, setLogin] = useState(false)
+    const { isLoadingShow } = useCrudContext()
 
     return (
         <div className='flex flex-col justify-center mt-8 relative w-[85%] lg:w-[80%] m-auto h-full'>
@@ -28,7 +31,11 @@ function Landing() {
                 </div>
             </div>
             {login && (
-                <LoginModal setLogin={setLogin} login={login} />
+                isLoadingShow
+                    ?
+                    <LoadingComponent />
+                    :
+                    <LoginModal setLogin={setLogin} login={login} />
             )}
         </div>
     )

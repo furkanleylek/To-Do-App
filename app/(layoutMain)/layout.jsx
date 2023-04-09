@@ -19,13 +19,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${roboto_mono.variable}`} >
       <head />
-      <body className='flex flex-col bg-main md:flex-row w-screen h-screen '>
+      <body className='flex flex-col bg-main md:flex-row w-screen h-screen overflow-hidden'>
         <Provider>
           <div className='hidden md:flex'>
             <SideBar />
           </div>
           <Navbar />
-          <div className='mx-8 mt-4 md:w-full' >
+          <div className='pt-4 px-8 md:w-full overflow-y-auto' >
             {children}
           </div>
         </Provider>

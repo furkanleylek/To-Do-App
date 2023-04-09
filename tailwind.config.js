@@ -102,7 +102,20 @@ module.exports = {
           transform: 'translateX(0%)',
         }
       }
-
+      ,
+      'bounce': {
+        to: {
+          transform: 'translateY(50px)'
+        }
+      },
+      'spin': {
+        from: {
+          transform: "rotate(0deg)"
+        },
+        to: {
+          transform: "rotate(360deg)"
+        }
+      }
     },
     animation: {
       'modal': 'modal both 400ms linear ',
@@ -110,7 +123,9 @@ module.exports = {
       'closeModal': 'menuModal both 300ms linear',
       'buttonLeftToRight': 'buttonLeftToRight both 300ms ease-out',
       'rightToOutside': 'rightToOutside both 400ms ease-out',
-      'outSideToLeft': 'outSideToLeft both 400ms ease-out'
+      'outSideToLeft': 'outSideToLeft both 400ms ease-out',
+      'bounce': 'bounce 2000ms infinite ease-in-out alternate',
+      'spin': 'spin 500ms linear infinite',
     }
   },
   plugins: [
