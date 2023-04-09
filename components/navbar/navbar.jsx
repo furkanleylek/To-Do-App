@@ -22,7 +22,7 @@ function Navbar() {
 
     // fApVirXJLFb6SzhG
     return (
-        <div className='block md:hidden pt-2 ' >
+        <div className='block md:hidden pt-2 bg-transparent ' >
             <div className='flex justify-between items-start  mx-4 my-4'>
                 <button
                     className="z-50 cursor-pointer transition-all text-4xl"
