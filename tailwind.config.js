@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'landing': "url('/todo-bg.jpg')"
+      },
       boxShadow: {
         'modal': '1px 1px 5px 1px rgba(0.1, 0.1, 0.1, 0.1)',
       },
@@ -125,7 +128,7 @@ module.exports = {
       'rightToOutside': 'rightToOutside both 400ms ease-out',
       'outSideToLeft': 'outSideToLeft both 400ms ease-out',
       'bounce': 'bounce 2000ms infinite ease-in-out alternate',
-      'spin': 'spin 500ms linear infinite',
+      'spin': 'spin 860ms linear infinite',
     }
   },
   plugins: [

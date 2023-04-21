@@ -14,6 +14,7 @@ function Provider({ children }) {
     const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
     const [countDoneTasks, setCountDoneTasks] = useState(0)
     const [isLoadingShow, setIsLoadingShow] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
 
@@ -32,6 +33,8 @@ function Provider({ children }) {
         setCountDoneTasks,
         isLoadingShow,
         setIsLoadingShow,
+        loading,
+        setLoading
     }
 
     return (

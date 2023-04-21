@@ -19,7 +19,6 @@ const handler = async (req, res) => {
                     message: 'This email is not registered',
                     errorCode: 'EMAIL_IS_NOT_REGISTERED',
                 });
-
             }
             if (req.body.password !== userExists.password) {
                 console.log("req.body.password", req.body.password)

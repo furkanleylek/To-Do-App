@@ -3,8 +3,8 @@ import Task from '@/schemas/task';
 
 const handlerTasks = async (req, res) => {
     await dbConnect()
-
     const { method } = req
+
     if (method === "GET") {
         try {
             const token = req.cookies.token

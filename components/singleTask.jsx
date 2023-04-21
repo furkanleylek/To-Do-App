@@ -7,17 +7,17 @@ import { TiTick } from 'react-icons/ti'
 import { MdDateRange } from 'react-icons/md'
 import TaskForm from './home/taskForm'
 
-function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
+function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
     const [showUpDelete, setShowUpDelete] = useState(false)
     const [isMax, setIsMax] = useState(false);
     const [isDone, setIsDone] = useState(false)
     const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs, setCountDoneTasks } = useCrudContext();
 
     useEffect(() => {
-        if (typeof singleEmail !== "undefined" && singleEmail.length >= 70) {
+        if (typeof singleDesc !== "undefined" && singleDesc.length >= 70) {
             setIsMax(true)
         }
-        else if (typeof singleEmail !== "undefined" && singleEmail.length <= 70) {
+        else if (typeof singleDesc !== "undefined" && singleDesc.length <= 70) {
             setIsMax(false)
         }
         setCheckMaxDescLength(false)
@@ -41,7 +41,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
             {!isUpdate
                 ?
                 <div className={`flex w-full gap-4 items-center ${isDone && `animate-rightToOutside animation-delay-400`} ${isCheck && `animate-outSideToLeft animation-delay-200`} `}>
-                    <div className={`${isImportant ? `border-2 border-important shadow-important shadow-sm` : `border-2 border-lightGrey shadow-md`} flex flex-col justify-center px-3 rounded-xl  bg-white w-full p-2 my-4`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
+                    <div className={`${isImportant ? `border-2 border-important shadow-important shadow-sm` : `border-2 border-lightGrey shadow-md`} flex flex-col  py-2 justify-center px-3 rounded-md bg-white w-full`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
                         <div className='flex items-center h-8 justify-between flex-wrap'>
                             <h5 className='cursor-default text-lg text-navBlue font-bold'>{singleTitle}</h5>
                             {showUpDelete &&
@@ -54,8 +54,8 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                             }
                         </div>
                         <p className='cursor-default max-w-[90%] break-all min-h-[44px] h-full py-2'>
-                            {isMax ? `${singleEmail.slice(0, 70)} . . .` : singleEmail}
-                            {typeof singleEmail !== "undefined" && singleEmail?.length >= 70 && (
+                            {isMax ? `${singleDesc.slice(0, 70)} . . .` : singleDesc}
+                            {typeof singleDesc !== "undefined" && singleDesc?.length >= 70 && (
                                 <span
                                     className="text-navBlue cursor-pointer font-base py-2 px-4 rounded mt-2"
                                     onClick={() => setIsMax(!isMax)}>
@@ -71,7 +71,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                             <button
                                 className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `}
                                 onClick={() => {
-                                    setDoneTasks(() => [{ id: singleId, checkedIndex: checkedIndex, email: singleEmail, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
+                                    setDoneTasks(() => [{ id: singleId, checkedIndex: checkedIndex, desc: singleDesc, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
                                     setIsDone(true)
                                     setTimeout(() => {
                                         setAllJobs((current) => current.filter((e) => e.id !== singleId))
@@ -85,7 +85,7 @@ function SingleTask({ singleId, singleEmail, singleTitle, singleDate, isImportan
                     </div>
                 </div>
                 :
-                <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={singleDate} prevDesc={singleEmail} prevImportant={isImportant} />
+                <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={singleDate} prevDesc={singleDesc} prevImportant={isImportant} />
             }
         </>
     )

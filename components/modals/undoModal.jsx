@@ -38,7 +38,7 @@ function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate,
     return (
         <>
             {isCheck && (
-                <div className="flex items-center z-50 text-sm justify-center fixed bottom-0 left-0 ml-6 mb-8 px-3 py-2 gap-2 bg-[#2B2D26] rounded-xl text-white animate-buttonLeftToRight transition-all duration-300 ease-in-out shadow-lg ">
+                <div className="flex items-center z-50 text-sm justify-center fixed bottom-0 left-0 ml-6 mb-8 px-3 py-2 gap-2 bg-[#2B2D26] rounded-xl text-white animate-buttonLeftToRight transition-all duration-300 ease-in-out shadow-lg   ">
                     <span>1 task completed
                     </span>
                     <button

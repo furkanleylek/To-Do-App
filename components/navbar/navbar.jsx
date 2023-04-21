@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { HiMenuAlt2 } from 'react-icons/hi'
 import { useCrudContext } from '@/components/context';
 import { IoPersonCircle } from 'react-icons/io5'
+import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineClose, AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai'
 import Menu from './menu'
 import OutsideClickHandler from 'react-outside-click-handler'
@@ -35,7 +36,7 @@ function Navbar() {
                     )}
                 </button>
                 <button className='w-36 flex flex-col justify-between h-20'>
-                    <div className='flex font-bold items-center justify-evenly w-full py-1 rounded opacity-90 hover:opacity-100 bg-navBlue transition-all' onClick={() => setLogOut(() => !logOut)}>
+                    <div className='flex font-bold items-center justify-between px-2 w-full py-1 rounded opacity-90 hover:opacity-100 bg-navBlue transition-all' onClick={() => setLogOut(() => !logOut)}>
                         <IoPersonCircle className='text-2xl text-white' />
                         <span className='text-white text-center capitalize'>{currentName}</span>
                         {logOut
@@ -46,7 +47,8 @@ function Navbar() {
                         }
                     </div>
                     {logOut &&
-                        <span className='w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
+                        <span className='flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
+                            <span className='text-2xl'><FiLogOut /></span>
                             Log Out
                         </span>
                     }

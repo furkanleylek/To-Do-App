@@ -1,29 +1,30 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose, AiOutlineLoading } from 'react-icons/ai'
 import { FaCheck } from 'react-icons/fa'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { useCrudContext } from '@/components/context';
 import { setCookie } from 'cookies-next'
 import { jwtToken } from './jwtToken'
-import LoadingComponent from '../loading'
+import Image from 'next/image'
+import check from '../../public/bluecheck.png'
+
 function Login({ setLogin }) {
 
-    const [users, setUsers] = useState([]);
     const [name, setName] = useState('');
-    const [userId, setUserId] = useState('123')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [register, setRegister] = useState(false)
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false)
-    const { isLoadingShow, setIsLoadingShow } = useCrudContext()
+    const [isSpinLoading, setIsSpinLoading] = useState(false)
+    const { setIsLoadingShow, loading, setLoading } = useCrudContext()
 
     const router = useRouter()
     const searchParams = useSearchParams()
 
     async function handleSubmit(e) {
         e.preventDefault()
+        setIsSpinLoading(true)
         if (register) {
             // register
             try {
@@ -43,19 +44,17 @@ function Login({ setLogin }) {
                 const data = await response.json();
                 if (data.errorCode == "EMAIL_ALREADY_IN_USE") {
                     setError(data.message);
+                    setIsSpinLoading(false)
                 }
                 if (response.status === 200) {
                     setLoading(true);
                     setCookie('token', token)
                     setCookie('username', name)
                     const nextUrl = searchParams.get('next')
-                    router.push(nextUrl ? nextUrl : '/').then(() => {
-                        setLoading(false);
-                    });
+                    router.push(nextUrl ? nextUrl : '/')
                 }
             } catch (error) {
-                setLoading(false);
-                console.error(error);
+                console.error("error:", error);
             }
         } else {
             // login
@@ -73,18 +72,18 @@ function Login({ setLogin }) {
                 const data = await response.json();
                 if (data.errorCode == "EMAIL_IS_NOT_REGISTERED") {
                     setError(data.message);
+                    setIsSpinLoading(false)
                 }
                 if (data.errorCode == "EMAIL_OR_PASSWORD_WRONG") {
                     setError(data.message);
+                    setIsSpinLoading(false)
                 }
                 if (response.status === 200) {
                     setLoading(true);
                     setCookie('token', data.token)
                     setCookie('username', data.name)
                     const nextUrl = searchParams.get('next')
-                    router.push(nextUrl ? nextUrl : '/').then(() => {
-                        setLoading(false);
-                    });
+                    router.push(nextUrl ? nextUrl : '/')
                 }
             } catch (error) {
                 console.error(error);
@@ -139,7 +138,7 @@ function Login({ setLogin }) {
         <div className='flex flex-col flex-1 w-full h-full overflow-y-hidden'>
             <AiOutlineClose className='text-4xl m-4 hover:scale-110 text-red self-end transition-all cursor-pointer ' onClick={() => setLogin(false)} />
             <div className="flex flex-col justify-center items-center h-full">
-                <FaCheck className='text-navBlue text-4xl lg:text-6xl ' />
+                <Image src={check} alt='check' width={40} height={40} />
                 <form className="flex flex-col items-center justify-between w-full max-w-md pt-10 rounded gap-4 " onSubmit={handleSubmit}>
                     {error && <p className='text-metal font-bold border-b-2 border-lightGrey pb-1'>{error}</p>}
                     {register && (
@@ -175,7 +174,13 @@ function Login({ setLogin }) {
                         <span className='absolute p-[12px] top-0 left-0 pointer-events-none text-[12px] text-black uppercase transition-all duration-300 opacity-30 ' id='telSpan'>Password</span>
                     </div>
                     <button disabled={(email.length && password.length) <= 0 ? true : false} className="bg-navBlue hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline disabled:opacity-70 disabled:cursor-not-allowed" type="submit" >
-                        {register ? 'Register' : 'Login'}
+                        {
+                            isSpinLoading
+                                ?
+                                <AiOutlineLoading className='animate-spin duration-1000 text-center w-full text-white text-2xl transition-all' />
+                                :
+                                (register ? 'Register' : 'Login')
+                        }
                     </button>
                     <button className="bg-metal hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline" >
                         Demo App
