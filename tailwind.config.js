@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'landing': "url('/todo-bg.jpg')"
+        'landing': "url('/todo-bg.webp')",
       },
       boxShadow: {
         'modal': '1px 1px 5px 1px rgba(0.1, 0.1, 0.1, 0.1)',
@@ -35,6 +35,29 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     colors: {
+      blue: {
+        '100': '#EBF8FF',
+        '200': '#BEE3F8',
+        '300': '#90CDF4',
+        '400': '#63B3ED',
+        '500': '#4299E1',
+        '600': '#3182CE',
+        '700': '#2B6CB0',
+        '800': '#2C5282',
+        '900': '#2A4365',
+      },
+      gray: {
+        '50': '#F9FAFB',
+        '100': '#F3F4F6',
+        '200': '#E5E7EB',
+        '300': '#D1D5DB',
+        '400': '#9CA3AF',
+        '500': '#6B7280',
+        '600': '#4B5563',
+        '700': '#374151',
+        '800': '#1F2937',
+        '900': '#111827',
+      },
       transparent: 'transparent',
       current: 'currentColor',
       "navBlue": "#3498db",
@@ -60,7 +83,7 @@ module.exports = {
       'primary': '#9CA7BC',
       'secondry': '#01010D',
       'tertiary': '#4B4B61',
-      'important': '#E1860D',
+      'important': '#F9A537',
     },
     keyframes: {
       'modal': {

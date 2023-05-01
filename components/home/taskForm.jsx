@@ -67,6 +67,27 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
         }
     }
 
+    async function updateData() {
+        try {
+            await fetch(`/api/tasks`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: updateId,
+                    desc: textAreaValue,
+                    title: title,
+                    date: selectedDate,
+                    important: isImportant,
+                    isUpdate: false,
+                    isCheck: false,
+                })
+            })
+        } catch (error) {
+            console.log("Error:", error)
+        }
+    }
 
     const handleClick = (e) => {
         // Tıklanan elemanın koordinatları
@@ -99,7 +120,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full my-4 max-w-xl  mb-[250px]'>
+        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full  max-w-xl'>
             <input
                 type="text"
                 placeholder='Task name'
@@ -178,6 +199,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                         <button
                             onClick={() => {
                                 {
+                                    updateData()
                                     setAllJobs(
                                         allJobs.map((job) => {
                                             return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;

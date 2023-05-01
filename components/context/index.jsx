@@ -5,9 +5,8 @@ const Context = createContext()
 
 function Provider({ children }) {
 
-
-
     const [allJobs, setAllJobs] = useState([])
+    const [currentData, setCurrentData] = useState([])
     const [doneTasks, setDoneTasks] = useState([])
     const [hoverTask, setHoverTask] = useState(false)
     const [addTask, setAddTask] = useState(false)
@@ -15,12 +14,13 @@ function Provider({ children }) {
     const [countDoneTasks, setCountDoneTasks] = useState(0)
     const [isLoadingShow, setIsLoadingShow] = useState(false)
     const [loading, setLoading] = useState(false)
-
-
-
+    const [sortBy, setSortBy] = useState("date"); // default date
+    const [search, setSearch] = useState('')
     const data = {
         allJobs,
         setAllJobs,
+        currentData,
+        setCurrentData,
         hoverTask,
         setHoverTask,
         addTask,
@@ -34,7 +34,11 @@ function Provider({ children }) {
         isLoadingShow,
         setIsLoadingShow,
         loading,
-        setLoading
+        setLoading,
+        sortBy,
+        setSortBy,
+        search,
+        setSearch
     }
 
     return (

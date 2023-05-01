@@ -23,8 +23,8 @@ function Navbar() {
 
     // fApVirXJLFb6SzhG
     return (
-        <div className='block md:hidden pt-2 bg-transparent ' >
-            <div className='flex justify-between items-start  mx-4 my-4'>
+        <div className='block md:hidden bg-transparent ' >
+            <div className='flex justify-between items-start  mx-4 my-4 '>
                 <button
                     className="z-50 cursor-pointer transition-all text-4xl"
                     onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +35,7 @@ function Navbar() {
                         <HiMenuAlt2 className='text-navBlue hover:scale-105 ' onClick={() => setIsOpen(true)} />
                     )}
                 </button>
-                <button className='w-36 flex flex-col justify-between h-20'>
+                <button className='relative w-36 flex flex-col justify-between items-center border-4 border-transparent '>
                     <div className='flex font-bold items-center justify-between px-2 w-full py-1 rounded opacity-90 hover:opacity-100 bg-navBlue transition-all' onClick={() => setLogOut(() => !logOut)}>
                         <IoPersonCircle className='text-2xl text-white' />
                         <span className='text-white text-center capitalize'>{currentName}</span>
@@ -47,7 +47,7 @@ function Navbar() {
                         }
                     </div>
                     {logOut &&
-                        <span className='flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
+                        <span className='absolute top-10 flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
                             <span className='text-2xl'><FiLogOut /></span>
                             Log Out
                         </span>

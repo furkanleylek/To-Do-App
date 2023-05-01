@@ -9,6 +9,8 @@ import { FiLogOut } from 'react-icons/fi'
 import { getCookie, deleteCookie } from 'cookies-next'
 import { useCrudContext } from '@/components/context';
 import LoadingComponent from './loading'
+import Image from 'next/image'
+import logo from '../public/bluecheck.png'
 
 function SideBar() {
 
@@ -21,16 +23,19 @@ function SideBar() {
         setCurrentName(getCookie('username'));
     }, []);
     return (
-        <div className='flex flex-col w-48 lg:w-60 h-screen justify-between items-center py-12 px-2 bg-navBlue'>
-            <FaCheck className='text-navBlue text-[100px]s' />
-            <div className='flex flex-col items-center justify-center w-full mb-60 gap-8'>
-                <Link className={`${pathName == '/stats' ? ` text-navBlue bg-white` : `text-white `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/stats">
-                    <span className='text-2xl'><IoStatsChart /></span>
-                    Stats
+        <div className='flex flex-col w-48 lg:w-60 h-screen justify-between items-center py-12 px-2 bg-navBlue '>
+
+            <div className='flex flex-col items-center justify-center w-full  gap-8'>
+                <Link href='/'>
+                    <Image src={logo} alt='logo' width={70} height={70} />
                 </Link>
                 <Link className={`${pathName == '/' ? `text-navBlue bg-white` : `text-white `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/">
                     <span className='text-xl'><FaList /></span>
                     All Tasks
+                </Link>
+                <Link className={`${pathName == '/stats' ? ` text-navBlue bg-white` : `text-white `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/stats">
+                    <span className='text-2xl'><IoStatsChart /></span>
+                    Stats
                 </Link>
                 <Link className={`${pathName == '/addtask' ? `text-navBlue bg-white` : `text-white `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-white hover:text-navBlue hover:transition-all w-full p-2 rounded `} href="/addtask" >
                     <span className='text-2xl'><MdPostAdd /></span>
@@ -38,10 +43,12 @@ function SideBar() {
                 </Link>
             </div>
             <div className='flex flex-col items-center justify-center w-full gap-6'>
-                <button className='flex flex-col items-center justify-center w-full'>
-                    <IoPersonCircle className='text-6xl text-white' />
-                    <span className='text-white text-[22px] capitalize font-bold mt-2'>{currentName}</span>
-                </button>
+                <Link href='/profile'>
+                    <button className='flex flex-col items-center justify-center w-full  py-6 px-10 rounded-full text-white hover:bg-white hover:text-navBlue transition-all'>
+                        <IoPersonCircle className='text-6xl' />
+                        <span className='text-[22px] capitalize font-bold mt-2'>{currentName}</span>
+                    </button>
+                </Link>
                 <button
                     className=' text-white flex gap-5 items-center justify-start test-xl font-bold hover:bg-white hover:border-transparent hover:text-navBlue hover:transition-all w-full p-2 rounded '
                     onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}

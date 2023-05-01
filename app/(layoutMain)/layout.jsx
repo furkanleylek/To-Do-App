@@ -11,13 +11,10 @@ const roboto_mono = Roboto_Mono({
 
 export const metadata = {
   title: 'To Do App',
-  openGraph: {
-    icons: {
-      icon: '/check.png',
-    }
-  },
+  icons: {
+    icon: '/bluecheck.png',
+  }
 };
-
 
 export default function RootLayout({ children }) {
   return (

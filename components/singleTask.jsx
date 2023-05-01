@@ -5,6 +5,7 @@ import Update from './crud/update'
 import { useCrudContext } from './context'
 import { TiTick } from 'react-icons/ti'
 import { MdDateRange } from 'react-icons/md'
+import { GrStar } from 'react-icons/gr'
 import TaskForm from './home/taskForm'
 
 function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
@@ -40,8 +41,8 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
         <>
             {!isUpdate
                 ?
-                <div className={`flex w-full gap-4 items-center ${isDone && `animate-rightToOutside animation-delay-400`} ${isCheck && `animate-outSideToLeft animation-delay-200`} `}>
-                    <div className={`${isImportant ? `border-2 border-important shadow-important shadow-sm` : `border-2 border-lightGrey shadow-md`} flex flex-col  py-2 justify-center px-3 rounded-md bg-white w-full`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
+                <div className={`flex w-full items-center ${isDone && `animate-rightToOutside animation-delay-400`} ${isCheck && `animate-outSideToLeft animation-delay-200`} `}>
+                    <div className={`relative bg-white border-2 border-lightGrey shadow-md flex flex-col justify-center gap-4 py-2 px-3 rounded-sm w-full`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
                         <div className='flex items-center h-8 justify-between flex-wrap'>
                             <h5 className='cursor-default text-lg text-navBlue font-bold'>{singleTitle}</h5>
                             {showUpDelete &&
@@ -53,9 +54,9 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                                 </div>
                             }
                         </div>
-                        <p className='cursor-default max-w-[90%] break-all min-h-[44px] h-full py-2'>
-                            {isMax ? `${singleDesc.slice(0, 70)} . . .` : singleDesc}
-                            {typeof singleDesc !== "undefined" && singleDesc?.length >= 70 && (
+                        <p className='cursor-default max-w-[90%] break-all min-h-[76px] h-full py-2 font-semibold'>
+                            {isMax ? `${singleDesc.slice(0, 140)} . . .` : singleDesc}
+                            {typeof singleDesc !== "undefined" && singleDesc?.length >= 140 && (
                                 <span
                                     className="text-navBlue cursor-pointer font-base py-2 px-4 rounded mt-2"
                                     onClick={() => setIsMax(!isMax)}>
@@ -82,6 +83,10 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                                 <TiTick className={`${isDone ? `text-white ` : `text-black opacity-50 hover:text-green`}  text-2xl  text-center m-auto`} />
                             </button>
                         </div>
+                        {isImportant && (
+                            // <GrStar className='text-important text-3xl opacity-80 absolute top-[-14px] left-[-14px]' />
+                            <GrStar className='text-important text-[220px] opacity-20 absolute flex self-center pointer-events-none ' />
+                        )}
                     </div>
                 </div>
                 :
