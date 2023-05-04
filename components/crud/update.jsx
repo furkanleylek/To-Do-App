@@ -10,13 +10,12 @@ function Update({ updateId }) {
 
     const idIndex = allIds.findIndex((e) => { return e == updateId })
 
-    const update = async () => {
+    const update = () => {
         setAllJobs(
             allJobs.map((job) => {
                 return job.id == updateId ? { ...job, isUpdate: true } : job;
             })
         )
-        
     }
 
     return (

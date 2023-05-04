@@ -5,24 +5,21 @@ const Context = createContext()
 
 function Provider({ children }) {
 
-    const [allJobs, setAllJobs] = useState([])
-    const [currentData, setCurrentData] = useState([])
-    const [doneTasks, setDoneTasks] = useState([])
-    const [hoverTask, setHoverTask] = useState(false)
-    const [addTask, setAddTask] = useState(false)
-    const [checkMaxDescLength, setCheckMaxDescLength] = useState(false)
-    const [countDoneTasks, setCountDoneTasks] = useState(0)
+    const [allJobs, setAllJobs] = useState([])  // show datas
+    const [currentData, setCurrentData] = useState([]) // hold old datas when searching
+    const [doneTasks, setDoneTasks] = useState([]) // when a task is checked , the data will be stored for 7 seconds
+    const [addTask, setAddTask] = useState(false) // to add new task
+    const [checkMaxDescLength, setCheckMaxDescLength] = useState(false) // read-more, read-less
+    const [countDoneTasks, setCountDoneTasks] = useState(0) // for stats checked tasks
     const [isLoadingShow, setIsLoadingShow] = useState(false)
     const [loading, setLoading] = useState(false)
     const [sortBy, setSortBy] = useState("date"); // default date
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('') // for searching
     const data = {
         allJobs,
         setAllJobs,
         currentData,
         setCurrentData,
-        hoverTask,
-        setHoverTask,
         addTask,
         setAddTask,
         checkMaxDescLength,

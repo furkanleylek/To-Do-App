@@ -2,9 +2,10 @@
 import React, { useEffect } from 'react'
 import { useCrudContext } from '@/components/context';
 import { AiOutlineClose } from 'react-icons/ai'
+import { getCookie } from 'cookies-next'
 
-function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
-    const { doneTasks, setDoneTasks, allJobs, setAllJobs, setCountDoneTasks } = useCrudContext();
+function UndoModal({ doneId, checkedIndex, singleDesc, singleTitle, singleDate, isImportant, isUpdate, isCheck }) {
+    const { doneTasks, setDoneTasks, setAllJobs, setCurrentData, setCountDoneTasks } = useCrudContext();
 
     function arrangeDoneCheck() {
         setDoneTasks(
@@ -13,14 +14,54 @@ function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate,
             })
         )
     }
+    useEffect(() => {
+        window.token = getCookie('token')
+    }, [])
+    async function deleteFromDatabase() {
+        try {
+            await fetch(`/api/tasks`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: doneId,
+                })
+            })
+
+        } catch (error) {
+            console.log("Error:", error)
+        }
+    }
+    async function postDoneTasks() {
+        try {
+            await fetch(`/api/done`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: token,
+                    doneTasks: doneId,
+                })
+            })
+
+        } catch (error) {
+            console.log("Error:", error)
+        }
+    }
     function undoTask() {
 
         setAllJobs(prevTasks => {
             const tasks = [...prevTasks]
-            tasks.splice(checkedIndex, 0, { id: doneId, email: singleEmail, title: singleTitle, date: singleDate, important: isImportant, isUpdate: isUpdate, isCheck: true })
+            tasks.splice(checkedIndex, 0, { id: doneId, desc: singleDesc, title: singleTitle, date: singleDate, important: isImportant, isUpdate: isUpdate, isCheck: true })
             return tasks
         })
-
+        setCurrentData(prevTasks => {
+            const tasks = [...prevTasks]
+            tasks.splice(checkedIndex, 0, { id: doneId, desc: singleDesc, title: singleTitle, date: singleDate, important: isImportant, isUpdate: isUpdate, isCheck: true })
+            return tasks
+        })
         setDoneTasks((done) =>
             done.filter((e) => e.id !== doneId))
     }
@@ -30,25 +71,28 @@ function UndoModal({ doneId, checkedIndex, singleEmail, singleTitle, singleDate,
         if (isCheck) {
             timeout = setTimeout(() => {
                 arrangeDoneCheck()
+                postDoneTasks()
+                deleteFromDatabase()
             }, 7000);
         }
         return () => clearTimeout(timeout);
     }, [isCheck]);
 
+
     return (
         <>
             {isCheck && (
-                <div className="flex items-center z-50 text-sm justify-center fixed bottom-0 left-0 ml-6 mb-8 px-3 py-2 gap-2 bg-[#2B2D26] rounded-xl text-white animate-buttonLeftToRight transition-all duration-300 ease-in-out shadow-lg   ">
+                <div className="flex items-center z-50 text-sm justify-center fixed bottom-0 left-0 ml-6 mb-8 px-3 py-2 gap-2 bg-font rounded-xl text-fontSecond animate-buttonLeftToRight transition-all duration-300 ease-in-out shadow-lg   ">
                     <span>1 task completed
                     </span>
                     <button
-                        className='text-lightRed hover:bg-grey p-2 rounded'
+                        className='text-lightRed hover:bg-hover p-2 rounded'
                         onClick={() => { arrangeDoneCheck(), undoTask(), setCountDoneTasks((prev) => prev - 1) }}
                     >
                         Undo
                     </button>
                     <button
-                        className="hover:bg-grey font-bold p-2 rounded"
+                        className="hover:bg-hover hover:text-font font-bold p-2 rounded"
                         onClick={() => arrangeDoneCheck()}
                     >
                         <AiOutlineClose />

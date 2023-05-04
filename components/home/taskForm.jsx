@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useCrudContext } from '@/components/context';
 import { AiOutlineClose } from 'react-icons/ai'
-import { MdDateRange, MdLabelImportant } from 'react-icons/md'
+import { MdDateRange } from 'react-icons/md'
+import { GrStar } from 'react-icons/gr'
 import { IoMdSend } from 'react-icons/io'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,7 +24,7 @@ function generateKey() {
 
 
 function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
-    const { allJobs, setAllJobs, setHoverTask, setAddTask, setCheckMaxDescLength } = useCrudContext();
+    const { allJobs, setAllJobs, currentData, setCurrentData, setAddTask, setCheckMaxDescLength } = useCrudContext();
     const [title, setTitle] = useState(typeof prevTitle == "undefined" ? '' : prevTitle)
     const [textAreaValue, setTextAreaValue] = useState(typeof prevDesc == "undefined" ? '' : prevDesc);
     const [selectedDate, setSelectedDate] = useState(null)
@@ -37,7 +38,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     useEffect(() => {
         window.token = getCookie('token')
         console.log(token)
-    })
+    }, [])
 
     async function handleData() {
         try {
@@ -59,9 +60,6 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
             });
 
             const data = await response.json();
-            console.log(data);
-
-            // do something with the response, such as displaying a success message
         } catch (error) {
             console.error(error);
         }
@@ -120,26 +118,26 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
     }
 
     return (
-        <div className='flex flex-col justify-between border-2 rounded-xl border-lightGrey w-full  max-w-xl'>
+        <div className='flex flex-col justify-between border-2 rounded-sm border-line w-full '>
             <input
                 type="text"
                 placeholder='Task name'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="px-4 py-2 font-bold  border-b-2 text-navBlue rounded-t-xltext-navBlue border-lightGrey shadow-md outline-none focus:outline-none appearance-none leading-tight focus:shadow-outline"
+                className="px-4 py-2 font-bold border-b-2 text-secondary rounded-sm border-line outline-none focus:outline-none appearance-none leading-tight focus:shadow-outline"
                 name='title'
             />
             <textarea
-                className="w-full px-4 py-2 text-black focus:outline-none appearance-none leading-tight focus:shadow-outline focus:border-navBlue"
+                className="w-full px-4 py-4 text-font focus:outline-none appearance-none leading-tight focus:shadow-outline focus:border-secondary"
                 rows="4"
                 placeholder="Enter your text here"
                 value={textAreaValue}
                 onChange={(e) => setTextAreaValue(e.target.value)}
             />
-            <div className='flex flex-wrap items-center justify-between border-t-2 pt-2 bg-white rounded-b-[20px] border-lightGrey px-2'>
-                <div className='flex items-center mb-2 gap-4 sm:gap-8 bg-white px-3 flex-wrap '>
+            <div className='flex flex-wrap items-center justify-between border-t-2 pt-2 bg-accent rounded-b-[20px] border-line px-2'>
+                <div className='flex items-center mb-2 gap-4 sm:gap-8 bg-accent px-3 flex-wrap '>
                     {/* date */}
-                    <div className="flex h-8 border-2 border-lightGrey hover:bg-silver focus:bg-silver px-1 sm:px-0 rounded items-center justify-center ">
+                    <div className="flex h-8 border-2 border-line hover:bg-hover  focus:bg-primary px-1 sm:px-0 rounded items-center justify-center ">
                         <MdDateRange className='text-red text-md sm:text-xl sm:ml-2' />
                         <div className="rounded-lg">
                             <DatePicker
@@ -152,7 +150,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 value={
                                     selectedDate ? getSelectedDate(selectedDate) : 'End Date'
                                 }
-                                className="text-center w-14 sm:w-24  mb-1 hover:bg-silver bg-transparent caret-transparent text-[10px] sm:text-sm font-medium focus:outline-none appearance-none leading-tight focus:shadow-outline cursor-pointer"
+                                className="text-center w-14 sm:w-24  mb-1 hover:bg-hover bg-transparent caret-transparent text-[10px] sm:text-sm font-medium focus:outline-none appearance-none leading-tight focus:shadow-outline cursor-pointer"
                                 dateFormat="dd/MM/yyyy"
                                 minDate={new Date()}
                                 highlightDates={[
@@ -173,25 +171,25 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                     {/* important */}
 
                     <button
-                        className={`${isImportant ? `bg-important border-important` : `hover:bg-silver  border-lightGrey`} border-2 transition-all flex h-8 px-1 sm:px-0 sm:min-w-[128px] rounded items-center justify-center gap-2`}
+                        className={`${isImportant ? `bg-important border-important` : `hover:bg-hover  border-line`} border-2 transition-all flex h-8 px-1 sm:px-0 sm:min-w-[128px] rounded items-center justify-center gap-2`}
                         onClick={() => setIsImportant((prev) => !prev)}
                     >
-                        <MdLabelImportant className={`${isImportant ? `text-white` : `text-important`} text-md sm:text-2xl`} />
-                        <span className={`${isImportant ? `text-white` : `text-black`} text-[10px] sm:text-sm font-medium`}>Important</span>
+                        <GrStar className={`${isImportant ? `text-fontSecond` : `text-important`} text-md sm:text-2xl`} />
+                        <span className={`${isImportant ? `text-fontSecond` : `text-font`} text-[10px] sm:text-sm font-medium`}>Important</span>
                     </button>
                     {/* select */}
                 </div>
-                <div className='flex flex-wrap items-center justify-evenly mb-2 '>
-                    <AiOutlineClose className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px] cursor-pointer hover:bg-lightGrey text-metal'
+                <div className='flex flex-wrap items-center justify-evenly mb-2* '>
+                    <AiOutlineClose className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px] cursor-pointer hover:bg-line text-font'
                         onClick={() => {
                             {
                                 setAddTask(false)
-                                setHoverTask(false)
                                 setAllJobs(
                                     allJobs.map((job) => {
                                         return job.id == updateId ? { ...job, isUpdate: false } : job;
                                     })
                                 )
+
                             }
                         }} />
                     {isUpdate
@@ -205,15 +203,19 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                             return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
                                         })
                                     )
+                                    setCurrentData(
+                                        currentData.map((job) => {
+                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
+                                        })
+                                    )
                                     setAddTask(false)
-                                    setHoverTask(false)
                                     setCheckMaxDescLength(true)
                                 }
                             }}
-                            disabled={title ? false : true}
-                            className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
+                            disabled={title ? false : true && textAreaValue ? false : true}
+                            className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer"
                         >
-                            <IoMdSend className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'
+                            <IoMdSend className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px] border-2 bg-darkRed text-white'
                             />
                         </button>
                         :
@@ -222,12 +224,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 {
                                     handleData()
                                     setAllJobs(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
+                                    setCurrentData(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
                                     setAddTask(false)
-                                    setHoverTask(false)
                                     setCheckMaxDescLength(true)
                                 }
                             }}
-                            disabled={title ? false : true}
+                            disabled={title ? (textAreaValue ? false : true) : true}
                             className="disabled:opacity-50 disabled:cursor-not-allowed opacity-90 hover:opacity-100 cursor-pointer "
                         >
                             <IoMdSend className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg p-[6px]  border-2 bg-darkRed text-white'

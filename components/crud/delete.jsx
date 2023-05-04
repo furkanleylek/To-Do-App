@@ -5,12 +5,14 @@ import { MdDelete } from 'react-icons/md'
 
 function Delete({ deletedId }) {
 
-    const { setAllJobs } = useCrudContext();
+    const { setAllJobs, setCurrentData } = useCrudContext();
 
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
     const removeId = async () => {
         setAllJobs((current) =>
+            current.filter((e) => e.id !== deletedId))
+        setCurrentData((current) =>
             current.filter((e) => e.id !== deletedId))
         try {
             await fetch(`/api/tasks`, {
@@ -38,7 +40,7 @@ function Delete({ deletedId }) {
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                         <div className="bg-white opacity-100 relative z-50 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
                             <div className="flex items-center justify-center gap-2 px-4 py-8 sm:px-6 sm:py-12 border-b-4">
-                                <MdDelete className='text-red text-2xl ' />
+                                <MdDelete className='text-red text-5xl ' />
                                 <span className="text-greyBlue text-xl font-bold text-center font-base">
                                     Are you sure you want to delete this task?
                                 </span>

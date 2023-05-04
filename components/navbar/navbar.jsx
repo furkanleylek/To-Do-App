@@ -30,24 +30,24 @@ function Navbar() {
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? (
-                        <AiOutlineClose className='text-navBlue fixed bg-lightGrey hover:scale-105 rounded-full p-2' onClick={() => setIsOpen(false)} />
+                        <AiOutlineClose className='text-secondary fixed bg-line hover:scale-105 rounded-full p-2' onClick={() => setIsOpen(false)} />
                     ) : (
                         <HiMenuAlt2 className='text-navBlue hover:scale-105 ' onClick={() => setIsOpen(true)} />
                     )}
                 </button>
                 <button className='relative w-36 flex flex-col justify-between items-center border-4 border-transparent '>
-                    <div className='flex font-bold items-center justify-between px-2 w-full py-1 rounded opacity-90 hover:opacity-100 bg-navBlue transition-all' onClick={() => setLogOut(() => !logOut)}>
-                        <IoPersonCircle className='text-2xl text-white' />
-                        <span className='text-white text-center capitalize'>{currentName}</span>
+                    <div className='flex font-bold items-center justify-between px-2 w-full py-1 rounded opacity-90 hover:opacity-100 bg-secondary transition-all' onClick={() => setLogOut(() => !logOut)}>
+                        <IoPersonCircle className='text-2xl text-fontSecond' />
+                        <span className='text-fontSecond text-center capitalize'>{currentName}</span>
                         {logOut
                             ?
-                            <AiOutlineCaretUp className='text-white' />
+                            <AiOutlineCaretUp className='text-fontSecond' />
                             :
-                            <AiOutlineCaretDown className='text-white' />
+                            <AiOutlineCaretDown className='text-fontSecond' />
                         }
                     </div>
                     {logOut &&
-                        <span className='absolute top-10 flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-midnight text-white' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
+                        <span className='absolute top-10 flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-font text-fontSecond' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
                             <span className='text-2xl'><FiLogOut /></span>
                             Log Out
                         </span>
@@ -60,7 +60,7 @@ function Navbar() {
             {/* Sidebar - Open - Close */}
             <OutsideClickHandler onOutsideClick={() => { setIsOpen(false) }} display="contents">
                 <div
-                    className={`sidebar fixed z-10 top-0 left-0 h-screen w-60 bg-white shadow-lg transform transition-all duration-300 ease-out ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`sidebar fixed z-10 top-0 left-0 h-screen w-60 bg-fontSecond shadow-lg transform transition-all duration-300 ease-out ${isOpen ? "translate-x-0" : "-translate-x-full"
                         }`}
                 >
                     <Menu setIsOpen={setIsOpen} />

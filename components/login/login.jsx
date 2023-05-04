@@ -23,6 +23,7 @@ function Login({ setLogin }) {
     const searchParams = useSearchParams()
 
     async function handleSubmit(e) {
+        console.log(email.length)
         e.preventDefault()
         setIsSpinLoading(true)
         if (register) {
@@ -182,9 +183,19 @@ function Login({ setLogin }) {
                                 (register ? 'Register' : 'Login')
                         }
                     </button>
-                    <button className="bg-metal hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline" >
-                        Demo App
-                    </button>
+                    {!register && (
+                        <button
+                            className="bg-metal hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline"
+                            onClick={() => {
+                                setEmail("testuser@hotmail.com")
+                                setName("Anonim")
+                                setPassword("test123")
+                            }}
+                        >
+                            Test User
+                        </button>
+                    )}
+
                     {register == true
                         ?
                         <span className='text-grey font-bold'>Already a member ?

@@ -4,8 +4,6 @@ import { useCrudContext } from '../context'
 import SingleTask from '../singleTask'
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import OutsideClickHandler from 'react-outside-click-handler';
-import { GrStar } from 'react-icons/gr'
-import { MdDateRange, MdOutlineSubtitles } from 'react-icons/md'
 
 export function SortOption() {
 
@@ -29,7 +27,7 @@ export function SortOption() {
                     <span className="rounded-md shadow-sm">
                         <button
                             type="button"
-                            className="flex items-center opacity-70 hover:opacity-100 justify-between w-full rounded-md border border-gray-300 p-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-200 transition duration-150 ease-in-out"
+                            className="flex items-center opacity-70 hover:opacity-100 justify-between w-full rounded-md border border-line p-2 bg-accent text-sm leading-5 font-medium text-font hover:bg-primary focus:outline-none focus:shadow-outline-blue focus:border-secondary transition duration-150 ease-in-out"
                             id="options-menu"
                             aria-haspopup="true"
                             aria-expanded="true"
@@ -46,7 +44,7 @@ export function SortOption() {
                 </div>
                 <div
                     className={`${isOpen ? "absolute" : "hidden"
-                        } z-10 mt-1 w-full rounded-md bg-white shadow-lg`}
+                        } z-10 mt-1 w-full rounded-md bg-primary shadow-lg`}
                 >
                     <div className="py-1 ">
                         {options.map((option) => (
@@ -54,10 +52,10 @@ export function SortOption() {
                                 key={option.value}
                                 onClick={() => handleOptionClick(option.value)}
                                 className={`${sortBy === option.value
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700"
+                                    ? "bg-secondary text-accent"
+                                    : "text-font"
                                     } 
-                                    block items-center w-full font-semibold text-left px-4 py-2 text-sm leading-5 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900`}
+                                    block items-center w-full font-semibold text-left px-4 py-2 text-sm leading-5 hover:bg-secondary hover:text-accent focus:outline-none focus:bg-primary focus:text-font`}
                             >
                                 {option.label}
                             </button>
@@ -95,7 +93,7 @@ function Sort() {
 
             {
                 sortedJobs.map((e) => (
-                    <div key={e.id} className="flex flex-col justfiy-center items-center w-full mt-2 ">
+                    <div key={e.id} className="flex flex-col justfiy-center items-center w-full">
                         <SingleTask key={e.id} singleId={e.id} singleDesc={e.desc} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} isCheck={e.isCheck} />
                     </div>
                 ))

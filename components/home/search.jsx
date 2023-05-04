@@ -1,16 +1,12 @@
 'use client'
 import { useState, useEffect, useRef } from "react"
 import { AiFillCloseCircle, AiOutlineSearch } from 'react-icons/ai'
-
-// import { fetchWantedGifs, fetchWantedStickers } from "@/services";
-// import { useContextGif } from "./context";
 import { useCrudContext } from "../context"
 
 const Search = () => {
     const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef(null)
     const { allJobs, currentData, setAllJobs, search, setSearch } = useCrudContext()
-    // const { setWantedGifs, setWantedStickers, search, setSearch, setIsLoading, offSet } = useContextGif()
 
     useEffect(() => {
         if (search.length > 0) {
@@ -26,9 +22,9 @@ const Search = () => {
 
     return (
         <>
-            <div className="relative gap-2 w-full max-w-[800px]">
+            <div className={`w-full  relative gap-2 max-w-[800px]`}>
                 <input
-                    className={`${isFocused ? 'bg-white text-greyBlue' : 'bg-white shadow-md'} pl-10 italic text-base font-semibold py-2 px-10 w-full m-auto h-10 rounded-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out`}
+                    className={`${isFocused ? 'bg-accent text-font mr-[500px]  sm:mr-0' : 'bg-accent shadow-md'}  italic text-base font-semibold py-2 px-10 w-full m-auto h-10 rounded-md focus:outline-none focus:ring-2 transition duration-200 ease-in-out`}
                     type="text"
                     value={search}
                     ref={inputRef}
@@ -48,7 +44,7 @@ const Search = () => {
                         <AiFillCloseCircle className="text-2xl z-10 text-greyBlue" />
                     </button>
                 )}
-                <AiOutlineSearch className="absolute top-0 left-2 h-full flex text-grey items-center justify-center text-2xl  cursor-default pointer-events-none " />
+                <AiOutlineSearch className="absolute top-0 left-2 h-full flex text-line items-center justify-center text-2xl  cursor-default pointer-events-none " />
             </div>
 
         </>

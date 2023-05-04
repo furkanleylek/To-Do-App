@@ -18,6 +18,7 @@ module.exports = {
       },
     },
     screens: {
+      'tiny': '360px',
       'exsm': '460px',
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
@@ -80,10 +81,16 @@ module.exports = {
       'greyWhite': '#ffffff40',
       'greyB': '#D5D5D5',
       'main': '#F8FAFD',
-      'primary': '#9CA7BC',
-      'secondry': '#01010D',
-      'tertiary': '#4B4B61',
+
+      'primary': '#F8FAFD',
+      'secondary': '#3498db',
+      'accent': '#ffffff',
+      'font': '#1d2b3a',
+      'fontSecond': '#ffffff',
+      'line': '#D8DCE3',
+      'hover': '#ecebff',
       'important': '#F9A537',
+
     },
     keyframes: {
       'modal': {

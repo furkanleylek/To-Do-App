@@ -12,13 +12,13 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
     const [showUpDelete, setShowUpDelete] = useState(false)
     const [isMax, setIsMax] = useState(false);
     const [isDone, setIsDone] = useState(false)
-    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs, setCountDoneTasks } = useCrudContext();
+    const { checkMaxDescLength, setCheckMaxDescLength, setDoneTasks, allJobs, setAllJobs, setCurrentData, setCountDoneTasks } = useCrudContext();
 
     useEffect(() => {
-        if (typeof singleDesc !== "undefined" && singleDesc.length >= 70) {
+        if (typeof singleDesc !== "undefined" && singleDesc.length >= 115) {
             setIsMax(true)
         }
-        else if (typeof singleDesc !== "undefined" && singleDesc.length <= 70) {
+        else if (typeof singleDesc !== "undefined" && singleDesc.length <= 115) {
             setIsMax(false)
         }
         setCheckMaxDescLength(false)
@@ -42,9 +42,9 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
             {!isUpdate
                 ?
                 <div className={`flex w-full items-center ${isDone && `animate-rightToOutside animation-delay-400`} ${isCheck && `animate-outSideToLeft animation-delay-200`} `}>
-                    <div className={`relative bg-white border-2 border-lightGrey shadow-md flex flex-col justify-center gap-4 py-2 px-3 rounded-sm w-full`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
+                    <div className={`relative bg-primary border-2 border-line shadow-md flex flex-col justify-center gap-4 py-2 px-3 rounded-sm w-full`} onMouseOver={() => setShowUpDelete(true)} onMouseLeave={() => setShowUpDelete(false)}>
                         <div className='flex items-center h-8 justify-between flex-wrap'>
-                            <h5 className='cursor-default text-lg text-navBlue font-bold'>{singleTitle}</h5>
+                            <h5 className='cursor-default text-lg text-secondary font-bold capitalize'>{singleTitle}</h5>
                             {showUpDelete &&
                                 <div className='flex flex-col items-start justify-between h-full '>
                                     <div className="flex items-center justify-center">
@@ -54,11 +54,11 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                                 </div>
                             }
                         </div>
-                        <p className='cursor-default max-w-[90%] break-all min-h-[76px] h-full py-2 font-semibold'>
-                            {isMax ? `${singleDesc.slice(0, 140)} . . .` : singleDesc}
-                            {typeof singleDesc !== "undefined" && singleDesc?.length >= 140 && (
+                        <p className='cursor-default max-w-[90%] break-all min-h-[86px] h-full py-2 font-semibold'>
+                            {isMax ? `${singleDesc.slice(0, 115)}. . .` : singleDesc}
+                            {typeof singleDesc !== "undefined" && singleDesc?.length >= 115 && (
                                 <span
-                                    className="text-navBlue cursor-pointer font-base py-2 px-4 rounded mt-2"
+                                    className="text-secondary cursor-pointer font-base py-2  px-4 rounded mt-2"
                                     onClick={() => setIsMax(!isMax)}>
                                     {isMax ? 'Read More' : 'Read Less'}
                                 </span>
@@ -72,10 +72,11 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                             <button
                                 className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `}
                                 onClick={() => {
-                                    setDoneTasks(() => [{ id: singleId, checkedIndex: checkedIndex, desc: singleDesc, title: singleTitle, date: singleDate, isimportant: isImportant, isUpdate: isUpdate, isCheck: true }])
+                                    setDoneTasks(() => [{ id: singleId, checkedIndex: checkedIndex, desc: singleDesc, title: singleTitle, date: singleDate, isImportant: isImportant, isUpdate: isUpdate, isCheck: true }])
                                     setIsDone(true)
                                     setTimeout(() => {
                                         setAllJobs((current) => current.filter((e) => e.id !== singleId))
+                                        setCurrentData((current) => current.filter((e) => e.id !== singleId))
                                     }, 1000);
                                     setCountDoneTasks((prev) => prev + 1)
                                 }}
@@ -84,8 +85,7 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                             </button>
                         </div>
                         {isImportant && (
-                            // <GrStar className='text-important text-3xl opacity-80 absolute top-[-14px] left-[-14px]' />
-                            <GrStar className='text-important text-[220px] opacity-20 absolute flex self-center pointer-events-none ' />
+                            <GrStar className='text-important text-[26px] opacity-90 absolute top-[-12px] left-[-10px]' />
                         )}
                     </div>
                 </div>
