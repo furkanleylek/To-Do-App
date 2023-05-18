@@ -8,7 +8,7 @@ const doneTasksSchema = new mongoose.Schema({
     doneTasks: {
         type: String
     }
-});
+}, { timestamps: true });
 
 const DoneTasks = mongoose.models.DoneTasks || mongoose.model('DoneTasks', doneTasksSchema);
 

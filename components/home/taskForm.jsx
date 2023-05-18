@@ -23,11 +23,11 @@ function generateKey() {
 
 
 
-function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
+function TaskForm({ isUpdate, updateId, prevTitle, prevDate, prevDesc, prevImportant }) {
     const { allJobs, setAllJobs, currentData, setCurrentData, setAddTask, setCheckMaxDescLength } = useCrudContext();
     const [title, setTitle] = useState(typeof prevTitle == "undefined" ? '' : prevTitle)
     const [textAreaValue, setTextAreaValue] = useState(typeof prevDesc == "undefined" ? '' : prevDesc);
-    const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate, setSelectedDate] = useState(typeof prevDate == null ? '' : prevDate)
     const [isImportant, setIsImportant] = useState(prevImportant)
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
     const [datePickerPos, setDatePickerPos] = useState({}); // DatePicker'ın konumu
@@ -97,26 +97,6 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
         });
     };
 
-
-    function getSelectedDate(value) {
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const selected = new Date(value);
-
-        if (selected.toDateString() === today.toDateString()) {
-            return 'Today';
-        } else if (selected.toDateString() === tomorrow.toDateString()) {
-            return 'Tomorrow';
-        } else if (selected > today && selected < new Date(today.getTime() + (5 * 24 * 60 * 60 * 1000))) {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            return days[selected.getDay()];
-        } else {
-            const options = { month: 'long', day: 'numeric' };
-            return selected.toLocaleDateString('en-US', options);
-        }
-    }
-
     return (
         <div className='flex flex-col justify-between border-2 rounded-sm border-line w-full '>
             <input
@@ -148,7 +128,7 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                 onClick={handleClick}
                                 calendarClassName="bg-white pt-6 rounded-lg shadow-md p-4"
                                 value={
-                                    selectedDate ? getSelectedDate(selectedDate) : 'End Date'
+                                    selectedDate ? selectedDate : 'End Date'
                                 }
                                 className="text-center w-14 sm:w-24  mb-1 hover:bg-hover bg-transparent caret-transparent text-[10px] sm:text-sm font-medium focus:outline-none appearance-none leading-tight focus:shadow-outline cursor-pointer"
                                 dateFormat="dd/MM/yyyy"
@@ -200,12 +180,12 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                                     updateData()
                                     setAllJobs(
                                         allJobs.map((job) => {
-                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
+                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: selectedDate, important: isImportant, isUpdate: false, isCheck: false } : job;
                                         })
                                     )
                                     setCurrentData(
                                         currentData.map((job) => {
-                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false } : job;
+                                            return job.id == updateId ? { ...job, desc: textAreaValue, title: title, date: selectedDate, important: isImportant, isUpdate: false, isCheck: false } : job;
                                         })
                                     )
                                     setAddTask(false)
@@ -223,8 +203,8 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDesc, prevImportant }) {
                             onClick={() => {
                                 {
                                     handleData()
-                                    setAllJobs(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
-                                    setCurrentData(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: getSelectedDate(selectedDate), important: isImportant, isUpdate: false, isCheck: false }])
+                                    setAllJobs(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: selectedDate, important: isImportant, isUpdate: false, isCheck: false }])
+                                    setCurrentData(oldArray => [...oldArray, { id: key, user_id: token, desc: textAreaValue, title: title, date: selectedDate, important: isImportant, isUpdate: false, isCheck: false }])
                                     setAddTask(false)
                                     setCheckMaxDescLength(true)
                                 }

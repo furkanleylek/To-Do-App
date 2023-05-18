@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { IoStatsChart } from 'react-icons/io5'
 import { MdPostAdd } from 'react-icons/md'
 import { FaList, FaCheck } from 'react-icons/fa'
-import { AiOutlineProfile } from 'react-icons/ai'
 import logo from '../../../public/bluecheck.png'
 
 
@@ -33,10 +32,6 @@ function Menu({ setIsOpen }) {
                         <Link className={` flex gap-5 items-center justify-start test-xl font-bold text-fontSecond hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/addtask" onClick={() => setIsOpen(() => false)}>
                             <span className='text-2xl'><MdPostAdd /></span>
                             Add Task
-                        </Link>
-                        <Link className={` flex gap-5 items-center justify-start test-xl font-bold text-fontSecond hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/profile" onClick={() => setIsOpen(() => false)}>
-                            <span className='text-2xl'><AiOutlineProfile /></span>
-                            Profile
                         </Link>
                     </div>
                 </div>

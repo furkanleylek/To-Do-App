@@ -44,12 +44,10 @@ function SideBar() {
                 </div>
             </div>
             <div className='flex flex-col items-center justify-center w-full gap-6 pb-12'>
-                <Link href='/profile'>
-                    <button className='flex flex-col items-center justify-center w-full  py-6 px-10 rounded-full text-primary hover:bg-primary hover:text-secondary transition-all'>
-                        <IoPersonCircle className='text-6xl' />
-                        <span className='text-[22px] capitalize font-bold mt-2'>{currentName}</span>
-                    </button>
-                </Link>
+                <button className='flex flex-col items-center justify-center w-full  py-6 px-10 rounded-full text-primary transition-all'>
+                    <IoPersonCircle className='text-6xl' />
+                    <span className='text-[22px] capitalize font-bold mt-2'>{currentName}</span>
+                </button>
                 <button
                     className=' text-white flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:border-transparent hover:text-secondary hover:transition-all w-full p-2 rounded '
                     onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}

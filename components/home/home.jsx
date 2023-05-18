@@ -38,32 +38,31 @@ function HomeComponent() {
 
     useEffect(() => {
         setShouldRender(!shouldRender)
-        console.log("rendered")
-        console.log(allJobs)
     }, [allJobs])
 
 
     return (
         <ClientOnly >
-            {
-                loading
-                    ?
-                    <TaskSkelaton count={8} />
-                    :
-                    <div className='flex flex-col items-center justify-center w-full '>
-                        <div className={`w-full flex flex-col tiny:flex-row relative items-center justify-between gap-8 my-4 border-b-2 border-line pb-6`}>
-                            <Search />
-                            <div className='flex items-center gap-1'>
-                                <SortOption />
-                                <button className='flex items-center  justify-center text-center gap-2 opacity-80 hover:opacity-100 bg-secondary rounded-md p-2 px-3 sm:px-4 '
-                                    onClick={() => setAddTask(true)}
-                                >
-                                    <AiOutlinePlus className="text-accent text-base sm:text-xl" />
-                                    <span className='text-sm text-accent font-bold '>New</span>
-                                </button>
-                            </div>
+            <div className='flex flex-col items-center justify-center w-full '>
+                <div className={`w-full flex flex-col tiny:flex-row relative items-center justify-between gap-8 my-4 border-b-2 border-line pb-6`}>
+                    <Search />
+                    <div className='flex items-center gap-1'>
+                        <SortOption />
+                        <button className='flex items-center  justify-center text-center gap-2 opacity-80 hover:opacity-100 bg-secondary rounded-md p-2 px-3 sm:px-4 '
+                            onClick={() => setAddTask(true)}
+                        >
+                            <AiOutlinePlus className="text-accent text-base sm:text-xl" />
+                            <span className='text-sm text-accent font-bold '>New</span>
+                        </button>
+                    </div>
+                </div>
+                {
+                    loading
+                        ?
+                        <div className='w-full '>
+                            <TaskSkelaton count={8} />
                         </div>
-
+                        :
                         <div className='w-full grid grid-cols-1 xl:grid-cols-2 gap-3'>
                             {
                                 addTask && (
@@ -112,8 +111,9 @@ function HomeComponent() {
                                 ))
                             }
                         </div>
-                    </div>
-            }
+                }
+            </div>
+
 
         </ClientOnly>
     )

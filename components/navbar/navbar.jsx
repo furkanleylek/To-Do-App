@@ -36,9 +36,9 @@ function Navbar() {
                     )}
                 </button>
                 <button className='relative w-36 flex flex-col justify-between items-center border-4 border-transparent '>
-                    <div className='flex font-bold items-center justify-between px-2 w-full py-1 rounded opacity-90 hover:opacity-100 bg-secondary transition-all' onClick={() => setLogOut(() => !logOut)}>
+                    <div className='flex items-center justify-between font-bold px-1 w-full py-1 rounded opacity-90 hover:opacity-100 bg-secondary transition-all' onClick={() => setLogOut(() => !logOut)}>
                         <IoPersonCircle className='text-2xl text-fontSecond' />
-                        <span className='text-fontSecond text-center capitalize'>{currentName}</span>
+                        <span className='text-fontSecond text-sm text-center capitalize'>{currentName}</span>
                         {logOut
                             ?
                             <AiOutlineCaretUp className='text-fontSecond' />
@@ -47,8 +47,8 @@ function Navbar() {
                         }
                     </div>
                     {logOut &&
-                        <span className='absolute top-10 flex items-center justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-font text-fontSecond' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
-                            <span className='text-2xl'><FiLogOut /></span>
+                        <span className='absolute top-10 flex items-center text-sm justify-start gap-5 px-2 w-full font-bold py-1 rounded opacity-70 hover:opacity-100 bg-font text-fontSecond' onClick={() => { deleteCookie('token'), deleteCookie('username'), setIsLoadingShow(true), router.push('/landing') }}>
+                            <span className='text-base'><FiLogOut /></span>
                             Log Out
                         </span>
                     }

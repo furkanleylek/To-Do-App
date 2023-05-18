@@ -34,8 +34,27 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
         return () => clearTimeout(timerAnimation);
 
     }, [checkMaxDescLength])
+    function getSelectedDate(value) {
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const selected = new Date(value);
 
+        if (selected.toDateString() === today.toDateString()) {
+            return 'Today';
+        } else if (selected.toDateString() === tomorrow.toDateString()) {
+            return 'Tomorrow';
+        } else if (selected > today && selected < new Date(today.getTime() + (5 * 24 * 60 * 60 * 1000))) {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[selected.getDay()];
+        } else {
+            const options = { month: 'long', day: 'numeric' };
+            return selected.toLocaleDateString('en-US', options);
+        }
+    }
     const checkedIndex = allJobs.findIndex((e) => { return e.id == singleId })
+    console.log("singleDate:", singleDate)
+    const arrangeDate = getSelectedDate(singleDate)
 
     return (
         <>
@@ -67,7 +86,7 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                         <div className='flex justify-between items-center flex-wrap'>
                             <span className='cursor-default flex text-sm items-center gap-2 opacity-90 h-8 text-red text-center  font-bold italic '>
                                 <MdDateRange />
-                                {singleDate}
+                                {arrangeDate}
                             </span>
                             <button
                                 className={`text-center rounded-md w-8 h-8 transition-all duration-300  ${isDone ? `bg-green` : `bg-white `} `}

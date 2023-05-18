@@ -188,7 +188,7 @@ function Login({ setLogin }) {
                             className="bg-metal hover:scale-105 transition-all text-white font-bold py-2 w-40 rounded focus:outline-none focus:shadow-outline"
                             onClick={() => {
                                 setEmail("testuser@hotmail.com")
-                                setName("Anonim")
+                                setName("TestUser")
                                 setPassword("test123")
                             }}
                         >
