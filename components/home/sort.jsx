@@ -87,7 +87,7 @@ function Sort() {
             return new Date(a.date) - new Date(b.date);
         }
     });
-
+    console.log(sortedJobs)
     return (
         <>
 

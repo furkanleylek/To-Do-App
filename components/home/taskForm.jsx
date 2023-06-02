@@ -37,7 +37,6 @@ function TaskForm({ isUpdate, updateId, prevTitle, prevDate, prevDesc, prevImpor
 
     useEffect(() => {
         window.token = getCookie('token')
-        console.log(token)
     }, [])
 
     async function handleData() {

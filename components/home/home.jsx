@@ -25,7 +25,6 @@ function HomeComponent() {
                     },
                 });
                 const data = await response.json();
-                console.log("GET:", data);
                 setLoading(false);
                 setAllJobs(data) // to show task datas
                 setCurrentData(data) // hold old datas when searching , instead of again get request

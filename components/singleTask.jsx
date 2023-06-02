@@ -53,8 +53,19 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
         }
     }
     const checkedIndex = allJobs.findIndex((e) => { return e.id == singleId })
-    console.log("singleDate:", singleDate)
     const arrangeDate = getSelectedDate(singleDate)
+
+    function convertDateFormat(dateString) {
+        const date = new Date(dateString);
+        const datePart = date.toDateString();
+        const timePart = date.toTimeString().split(' ')[0];
+        return `${datePart} ${timePart}`;
+    }
+
+    const convertedDate = convertDateFormat(singleDate);
+    const timeZone = 'GMT+0300 (GMT+03:00)';
+    const updatedDate = convertedDate + ' ' + timeZone;
+    const myDate = new Date(updatedDate);
 
     return (
         <>
@@ -109,7 +120,7 @@ function SingleTask({ singleId, singleDesc, singleTitle, singleDate, isImportant
                     </div>
                 </div>
                 :
-                <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={singleDate} prevDesc={singleDesc} prevImportant={isImportant} />
+                <TaskForm isUpdate={isUpdate} updateId={singleId} prevTitle={singleTitle} prevDate={myDate} prevDesc={singleDesc} prevImportant={isImportant} />
             }
         </>
     )
