@@ -125,6 +125,15 @@ body {
   animation: animloader 2s linear infinite;
 }
 
+
+.bg-landing {
+  background-image: url('../public/todo-bg.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
 @keyframes animloader {
   0% {
     background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;

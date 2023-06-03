@@ -12,7 +12,7 @@ export default function Layout({ children }) {
     return (
         <html lang="en">
             <head />
-            <body className='flex flex-col w-screen h-screen bg-landing from-font bg-cover'>
+            <body className='flex flex-col w-screen bg-black h-screen bg-landing from-font '>
                 <Provider>
                     {children}
                 </Provider>

@@ -7,9 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'landing': "url('/todo-bg.webp')",
-      },
+      // backgroundImage: {
+      //   'landing': "url('/todo-bg.webp')",
+      // },
       boxShadow: {
         'modal': '1px 1px 5px 1px rgba(0.1, 0.1, 0.1, 0.1)',
       },
