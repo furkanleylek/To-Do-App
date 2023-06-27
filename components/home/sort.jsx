@@ -4,7 +4,6 @@ import { useCrudContext } from '../context'
 import SingleTask from '../singleTask'
 import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import OutsideClickHandler from 'react-outside-click-handler';
-
 export function SortOption() {
 
     const { sortBy, setSortBy } = useCrudContext()
@@ -90,12 +89,13 @@ function Sort() {
     console.log(sortedJobs)
     return (
         <>
-
             {
                 sortedJobs.map((e) => (
                     <div key={e.id} className="flex flex-col justfiy-center items-center w-full">
+
                         <SingleTask key={e.id} singleId={e.id} singleDesc={e.desc} singleTitle={e.title} singleDate={e.date} isImportant={e.important} isUpdate={e.isUpdate} isCheck={e.isCheck} />
                     </div>
+
                 ))
             }
         </>

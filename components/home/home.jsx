@@ -10,6 +10,8 @@ import Sort from './sort';
 import { SortOption } from './sort';
 import { FaExclamationCircle } from 'react-icons/fa'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { motion } from 'framer-motion'
+
 
 function HomeComponent() {
     const [shouldRender, setShouldRender] = useState(true);
@@ -40,6 +42,7 @@ function HomeComponent() {
     }, [allJobs])
 
 
+
     return (
         <ClientOnly >
             <div className='flex flex-col items-center justify-center w-full '>
@@ -47,19 +50,19 @@ function HomeComponent() {
                     <Search />
                     <div className='flex items-center gap-1'>
                         <SortOption />
-                        <button className='flex items-center  justify-center text-center gap-2 opacity-80 hover:opacity-100 bg-secondary rounded-md p-2 px-3 sm:px-4 '
+                        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className='flex items-center  justify-center text-center gap-2 opacity-80 hover:opacity-100 bg-secondary rounded-md p-2 px-3 sm:px-4 '
                             onClick={() => setAddTask(true)}
                         >
                             <AiOutlinePlus className="text-accent text-base sm:text-xl" />
                             <span className='text-sm text-accent font-bold '>New</span>
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
                 {
                     loading
                         ?
                         <div className='w-full '>
-                            <TaskSkelaton count={8} />
+                            <TaskSkelaton count={6} />
                         </div>
                         :
                         <div className='w-full grid grid-cols-1 xl:grid-cols-2 gap-3'>

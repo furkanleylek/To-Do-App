@@ -10,7 +10,6 @@ const mono = Roboto_Mono({
 
 })
 
-
 export const metadata = {
   title: 'To Do App',
   icons: {
@@ -36,3 +35,4 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+

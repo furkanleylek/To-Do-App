@@ -11,6 +11,7 @@ import { useCrudContext } from '@/components/context';
 import LoadingComponent from './loading'
 import Image from 'next/image'
 import logo from '../public/bluecheck.png'
+import { motion } from 'framer-motion'
 
 function SideBar() {
 
@@ -29,18 +30,24 @@ function SideBar() {
                     <Image src={logo} alt='logo' width={70} height={70} />
                 </Link>
                 <div className='flex flex-col items-center justify-center w-full gap-6'>
-                    <Link className={`${pathName == '/' ? `text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/">
-                        <span className='text-xl'><FaList /></span>
-                        All Tasks
-                    </Link>
-                    <Link className={`${pathName == '/stats' ? ` text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/stats">
-                        <span className='text-2xl'><IoStatsChart /></span>
-                        Stats
-                    </Link>
-                    <Link className={`${pathName == '/addtask' ? `text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/addtask" >
-                        <span className='text-2xl'><MdPostAdd /></span>
-                        Add Task
-                    </Link>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className='w-full'>
+                        <Link className={`${pathName == '/' ? `text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/">
+                            <span className='text-xl'><FaList /></span>
+                            All Tasks
+                        </Link>
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className='w-full'>
+                        <Link className={`${pathName == '/stats' ? ` text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/stats">
+                            <span className='text-2xl'><IoStatsChart /></span>
+                            Stats
+                        </Link>
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className='w-full'>
+                        <Link className={`${pathName == '/addtask' ? `text-secondary bg-primary` : `text-primary `} flex gap-5 items-center justify-start test-xl font-bold hover:bg-primary hover:text-secondary hover:transition-all w-full p-2 rounded `} href="/addtask" >
+                            <span className='text-2xl'><MdPostAdd /></span>
+                            Add Task
+                        </Link>
+                    </motion.div>
                 </div>
             </div>
             <div className='flex flex-col items-center justify-center w-full gap-6 pb-12'>
