@@ -5,3 +5,5 @@ This project has been prepared using Next Js 13 App Directory , JavaScript and T
 
 
 The main purpose of this project is to create an API using MongoDB with Mongoose to enable GET, POST, UPDATE, and DELETE operations. NextJS has been used for API creation and data processing.
+Some authorization steps have been made with middleware for user login.
+
