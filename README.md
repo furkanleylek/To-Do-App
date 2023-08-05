@@ -1,4 +1,4 @@
-# FullStack ToDo App || Nextjs13,MongoDB, TailwindCSS
+# # FullStack ToDo App || Nextjs13, MongoDB, TailwindCSS
 
 ![todo-screenshot](https://github.com/furkanleylek/To-Do-App/assets/80426316/d1d30346-c650-452c-9a2e-6fa9a90f9823)
 ![todo-phone-screenshot](https://github.com/furkanleylek/To-Do-App/assets/80426316/d95f911c-94fa-4e8d-a87c-d96aad2ce69d)
