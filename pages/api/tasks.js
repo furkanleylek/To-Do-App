@@ -8,8 +8,10 @@ const handlerTasks = async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const token = req.cookies.token
-                const tasks = await Task.find({ user_id: token })
+                // const token = req.cookies.token
+                // const tasks = await Task.find({ user_id: token })
+                const tasks = await Task.find();
+                res.status(200).json(tasks);
                 res.status(200).json(tasks)
             } catch (err) {
                 console.log(err)
